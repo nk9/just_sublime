@@ -1,0 +1,12 @@
+{
+    "name": "Just",
+    "details": "https://github.com/nk9/Just-Sublime-Plugin",
+    "readme": "https://raw.githubusercontent.com/nk9/Just-Sublime-Plugin/main/README.md",
+    "issues": "https://github.com/nk9/Just-Sublime-Plugin/issues",
+    "releases": [
+        {
+            "sublime_text": "*",
+            "tags": true
+        }
+    ]
+}

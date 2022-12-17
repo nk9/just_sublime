@@ -1,0 +1,5 @@
+{
+    "shell_cmd": "just --unstable --check --fmt --justfile \"$file\"",
+    "selector": "source.just",
+    "quiet": true
+}
