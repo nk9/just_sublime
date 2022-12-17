@@ -3,10 +3,10 @@
 This is an open source plugin, and your PRs are welcome!
 
 ## Installing the package
-To try this on your own macOS or Linux system, make sure you have [Sublime installed](https://www.sublimetext.com/download). Then [fork this repo](https://github.com/nk9/Just-Sublime-Plugin/fork), download your fork, and symlink it into place. Be sure you change the name of the downloaded repo! This affects the way Sublime displays the syntax, and whether tests will run successfully.
+To try this on your own macOS or Linux system, make sure you have [Sublime installed](https://www.sublimetext.com/download). Then [fork this repo](https://github.com/nk9/just_sublime/fork), download your fork, and symlink it into place. Be sure you change the name of the downloaded repo! This affects the way Sublime displays the syntax, and whether tests will run successfully.
 
 ```bash
-~ $ git clone https://github.com/<YOUR-GITHUB-HANDLE>/Just-Sublime-Plugin.git Just
+~ $ git clone https://github.com/<YOUR-GITHUB-HANDLE>/just_sublime.git Just
 ~ $ cd Just
 Just $ ln -s $PWD ~/Library/Application\ Support/Sublime\ Text/Packages/Just
 ```
