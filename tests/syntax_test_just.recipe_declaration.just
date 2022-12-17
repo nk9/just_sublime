@@ -116,7 +116,9 @@ script3:
 #
 _build version:
     @-echo 'Building {{justfile() + "string"}}…'
-#                    ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.interpolation.just
+#          ^^^^^^^^^^ meta.string.just string.quoted.single.just - meta.interpolation
+#                    ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.just meta.interpolation.just - string.quoted.single
+#                                             ^^ meta.string.just string.quoted.single.just - meta.interpolation
 #                      ^^^^^^^^ meta.function-call.identifier.just support.function.builtin.just
 #                              ^ meta.function-call.arguments.just punctuation.section.group.begin.just
 #                               ^ meta.function-call.arguments.just punctuation.section.group.end.just

@@ -388,37 +388,48 @@ contexts:
     - match: '`'
       scope: punctuation.definition.string.begin.just
       push:
-        - meta_scope: string.quoted.backtick.just
+        - meta_scope: meta.string.just string.quoted.backtick.just
         - meta_include_prototype: false
         - match: \\.
           scope: constant.character.escape.just
         - match: '`'
           scope: punctuation.definition.string.end.just
           pop: 1
-        - include: recipe-content-interpolations
+        - include: recipe-content-string-interpolations
     - match: '"'
       scope: punctuation.definition.string.begin.just
       push:
-        - meta_scope: string.quoted.double.just
+        - meta_scope: meta.string.just string.quoted.double.just
         - meta_include_prototype: false
         - match: \\.
           scope: constant.character.escape.just
         - match: '"'
           scope: punctuation.definition.string.end.just
           pop: 1
-        - include: recipe-content-interpolations
+        - include: recipe-content-string-interpolations
     - match: "'"
       scope: punctuation.definition.string.begin.just
       push:
-        - meta_scope: string.quoted.single.just
+        - meta_scope: meta.string.just string.quoted.single.just
         - meta_include_prototype: false
         - match: \\.
           scope: constant.character.escape.just
         - match: "'"
           scope: punctuation.definition.string.end.just
           pop: 1
-        - include: recipe-content-interpolations
+        - include: recipe-content-string-interpolations
 
+  recipe-content-string-interpolations:
+    - match: '\{\{\{\{'
+      comment: Escaped double brace. Do nothing
+    - match: '\{\{(?!\{)'
+      scope: punctuation.section.interpolation.begin.just
+      push: recipe-content-string-interpolation-body
+
+  recipe-content-string-interpolation-body:
+    - clear_scopes: 1
+    - meta_scope: meta.interpolation.just
+    - include: recipe-content-interpolation-body
 
   recipe-content-shebang:
     - match: '^\s+#\!'
