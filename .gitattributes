@@ -2,7 +2,7 @@
 
 # Don't convert line endings in binary files
 *.png   binary
-*.webm  binary
+*.mp4   binary
 
 
 # Slim down the package for distribution
