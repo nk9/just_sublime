@@ -1,8 +1,8 @@
 {
     "name": "Just",
-    "details": "https://github.com/nk9/Just-Sublime-Plugin",
-    "readme": "https://raw.githubusercontent.com/nk9/Just-Sublime-Plugin/main/README.md",
-    "issues": "https://github.com/nk9/Just-Sublime-Plugin/issues",
+    "details": "https://github.com/nk9/just_sublime",
+    "readme": "https://raw.githubusercontent.com/nk9/just_sublime/main/README.md",
+    "issues": "https://github.com/nk9/just_sublime/issues",
     "releases": [
         {
             "sublime_text": "*",
