@@ -1,4 +1,4 @@
-# SYNTAX TEST "Packages/Just/just.sublime-syntax"
+# SYNTAX TEST "Packages/Just/Just.sublime-syntax"
 
 var := if "a" != "a" {"ne"} else {"eq"}
 #      ^^^^^^^^^^^^^^^^^^^^ meta.statement.conditional.if.just

@@ -1,4 +1,4 @@
-# SYNTAX TEST "Packages/Just/just.sublime-syntax"
+# SYNTAX TEST "Packages/Just/Just.sublime-syntax"
 
 for:
 # <- meta.function.just entity.name.function.just - meta.function.parameters
