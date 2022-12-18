@@ -20,7 +20,7 @@ Sublime contains a [built-in syntax testing system](https://www.sublimetext.com/
 
 This will open the console and show you the result of the tests.
 
-![Results of the syntax tests appear in the Sublime console](assets/syntax_test_results.png)
+![Results of the syntax tests appear in the Sublime console](assets/results_of_syntax_test.png)
 
 In this case, the test on line 67 is failing both at column 1, and also in columns 25, 26, 28, and 29.
 
