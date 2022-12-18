@@ -147,29 +147,24 @@ r2 +$f:
 #  ^^ meta.function.parameters.just
 #  ^ keyword.operator.variadic.just
 #   ^ keyword.operator.exported.just
-    echo "v"
 
 r1 $*f:
 #  ^^ meta.function.parameters.just invalid.illegal.just
-    echo "v"
 
 r2 +$+f:
 #  ^^^ meta.function.parameters.just
 #  ^ keyword.operator.variadic.just
 #   ^^ invalid.illegal.just
-    echo "v"
 
 r3 +$*f:
 #  ^^^ meta.function.parameters.just
 #  ^ keyword.operator.variadic.just
 #   ^^ invalid.illegal.just
-    echo "v"
 
 r4 $$f:
 #  ^^ meta.function.parameters.just
 #  ^ invalid.illegal.just
 #   ^ keyword.operator.exported.just
-    echo "v"
 
 r5 +$+$ f:
 #  ^^^^ meta.function.parameters.just
@@ -182,6 +177,17 @@ r6 **$f:
 #  ^ keyword.operator.variadic.just
 #   ^ invalid.illegal.just
 #    ^ keyword.operator.exported.just
+
+r7 $:
+#  ^ meta.function.parameters.just invalid.illegal.just
+
+
+r8 +:
+#  ^ meta.function.parameters.just invalid.illegal.just
+
+r9 +$:
+#  ^^ meta.function.parameters.just
+#   ^ invalid.illegal.just
 
 
 #

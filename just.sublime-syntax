@@ -299,7 +299,7 @@ contexts:
     - include: else-pop
 
   recipe-variadic-operator:
-    - match: '[\+\*]'
+    - match: '[\+\*](?!\s*:)'
       scope: keyword.operator.variadic.just
       pop: 1 # Only one allowed
     - include: else-pop
