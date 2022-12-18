@@ -29,3 +29,4 @@ jobs:
         with:
           build: ${{ matrix.build }}
           default_packages: ${{ matrix.packages }}
+          package_name: Just
