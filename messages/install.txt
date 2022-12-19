@@ -1,0 +1,46 @@
+________________________________________________________        
+ _______/\\\_____________________________________________       
+  ______\///____________________________________/\\\______      
+   _______/\\\___/\\\____/\\\___/\\\\\\\\\\___/\\\\\\\\\\\_     
+    ______\ \\\__\ \\\___\ \\\__\ \\\//////___\////\\\////__    
+     ______\ \\\__\ \\\___\ \\\__\ \\\\\\\\\\_____\ \\\______   
+      __/\\_\ \\\__\ \\\___\ \\\__\////////\\\_____\ \\\_/\\__  
+       _\//\\\\\\___\//\\\\\\\\\____/\\\\\\\\\\_____\//\\\\\___ 
+        __\//////_____\/////////____\//////////_______\/////____
+
+
+                     Syntax & Tools for just
+
+
+Quick Start
+-----------
+Files with these names (case insensitive) will be identified as just
+files automatically:
+
+  - justfile
+  - .justfile
+  - *.just
+
+If you already have a file open, you may need to close and reopen it.
+You can also choose the Just syntax from the menu in the bottom right
+hand corner of the window.
+
+While the syntax and comments only require this package, you will
+need to have just installed and in your PATH in order to use the
+Build System. You can learn how to do this in the just manual:
+
+  https://just.systems/man/en/chapter_3.html
+
+
+Reporting Issues
+----------------
+If you see any problems with this package, please report them:
+
+    https://github.com/nk9/just_sublime/issues
+
+
+Contributing
+------------
+Pull requests are welcome! Learn how to contribute here:
+
+    https://github.com/nk9/just_sublime/blob/main/CONTRIBUTING.md
