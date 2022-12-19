@@ -1,0 +1,25 @@
+%YAML 1.2
+---
+name: ShellScript (for Just)
+scope: source.shell.embedded.just
+version: 2
+hidden: true
+
+extends: Packages/ShellScript/Shell-Unix-Generic.sublime-syntax
+
+contexts:
+  prototype:
+    - meta_prepend: true
+    - include: scope:source.just#recipe-content-interpolations
+    - include: scope:source.just#recipe-content-modifiers
+
+  statements:
+    - meta_prepend: true
+    # command beginning with Just interpolation
+    - match: ^\s+(?=\{\{(?!\{))
+      push: [cmd-args, cmd-basic-name]
+
+  string-prototype:
+    # Note: not yet supported by ST 4143/4146 (it's in preparation)
+    - meta_prepend: true
+    - include: scope:source.just#recipe-content-string-interpolations
