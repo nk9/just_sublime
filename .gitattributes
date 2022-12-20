@@ -8,7 +8,6 @@
 # Slim down the package for distribution
 /assets/    export-ignore
 /.git*      export-ignore
-/tests/     export-ignore
 /*.md       export-ignore
 
 /packages.json  export-ignore
