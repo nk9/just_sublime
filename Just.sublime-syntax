@@ -1,5 +1,10 @@
 %YAML 1.2
 ---
+# Syntax for the just command runner
+#
+# Based on the just.sublime-syntax file by @TonioGela
+# Largely rewritten in 2022 by @nk9 using examples by @deathaxe
+
 # https://www.sublimetext.com/docs/syntax.html
 name: Just
 scope: source.just

@@ -4,7 +4,7 @@ This package contains a few different tools to help you make the most of the [`j
 
 ## Syntax Highlighting
 
-The Sublime syntax has been completely rewritten to be more expressive and support the latest `just` features. Conditional chaining, interpolation, recipe dependencies, nested groups — the syntax now supports it all!
+The Sublime syntax was based on the one originally made by [TonioGela](https://github.com/TonioGela). It has been rewritten to be more expressive and support the latest `just` features. Conditional chaining, interpolation with expressions, recipe dependencies, nested expressions and groups — the syntax now supports it all!
 
 ![settings_variables](assets/settings_variables.png)
 
