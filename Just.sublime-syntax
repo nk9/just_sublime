@@ -273,7 +273,7 @@ contexts:
     - include: else-pop
 
   recipe-name:
-    - match: '\b{{valid_name}}\b'
+    - match: '\b{{valid_name}}'
       scope: meta.function.just entity.name.function.just
       pop: 1 # Only match the first instance
       push:

@@ -138,6 +138,8 @@ build: script2 (_build target) script3
 #                            ^ punctuation.section.group.end.just
 #                              ^^^^^^^ entity.name.function.just
 
+r3-:
+#^^ meta.function.just entity.name.function.just
 
 
 #
