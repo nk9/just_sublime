@@ -170,6 +170,7 @@ _another_var := env_var_or_default("HOME", justfile_directory())
 #                                                             ^^ punctuation.section.group.end.just
 
 replaced := replace_regex("1alpha9", "\\d", "b")
+#           ^^^^^^^^^^^^^ meta.function-call.identifier.just support.function.builtin.just
 
 
 #
