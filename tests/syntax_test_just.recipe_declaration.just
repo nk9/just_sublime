@@ -223,7 +223,7 @@ windows-attr:
 
 
 test-image $PRODUCT $VERSION +IMAGES:
-#                            ^ meta.function.parameters.just keyword.operator.arithmetic.just
+#                            ^ meta.function.parameters.just keyword.operator.variadic.just
 #                             ^^^^^^ meta.function.parameters.just variable.parameter.just
 
 set-chart-version chart-version=version:

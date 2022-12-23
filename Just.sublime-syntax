@@ -319,9 +319,10 @@ contexts:
   recipe-parameter-assignment:
     - match: '='
       scope: keyword.operator.assignment.just
-    - include: just-expressions
-    - match: '\s+'
-      pop: 1
+      push:
+        - include: just-expressions
+        - match: '(\s+|(?=:))'
+          pop: 1
     - include: else-pop
 
   recipe-parameter-name:
