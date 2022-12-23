@@ -230,3 +230,24 @@ unix-attr:
 #^^^^^^^^^^ meta.annotation.just variable.annotation.just
 windows-attr:
     echo "windows recipe"
+
+
+test-image $PRODUCT $VERSION +IMAGES:
+#                            ^ meta.function.parameters.just keyword.operator.arithmetic.just
+#                             ^^^^^^ meta.function.parameters.just variable.parameter.just
+
+set-chart-version chart-version=version:
+# <- meta.function.just entity.name.function.just
+#^^^^^^^^^^^^^^^^ meta.function.just entity.name.function.just
+#                 ^^^^^^^^^^^^^ meta.function.parameters.just variable.parameter.just
+#                              ^ meta.function.parameters.just keyword.operator.assignment.just
+#                               ^^^^^^^ meta.function.parameters.just variable.other.just
+#                                      ^ keyword.operator.assignment.just
+
+alias-name:
+# <- meta.function.just entity.name.function.just
+#^^^^^^^^^ meta.function.just entity.name.function.just
+
+export-name:
+# <- meta.function.just entity.name.function.just
+#^^^^^^^^^^ meta.function.just entity.name.function.just

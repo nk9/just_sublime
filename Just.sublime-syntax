@@ -449,7 +449,7 @@ contexts:
 # Ex: "set shell := ['zsh', '-cu']", "set dotenv-load", "set export := false"
 
   settings:
-    - match: '^set\b'
+    - match: '^set(?=\s+)'
       scope: storage.modifier.definition.just
       push:
         - settings-boolean
