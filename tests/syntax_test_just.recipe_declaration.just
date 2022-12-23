@@ -197,39 +197,29 @@ r9 +$:
 #
 
 [no-cd]
+# <- meta.annotation.just variable.annotation.just
 #^^^^^^ meta.annotation.just variable.annotation.just
-no-cd-attr:
-    echo "no-cd"
-
 [no-exit-message]
 #^^^^^^^^^^^^^^^^ meta.annotation.just variable.annotation.just
-no-exit-message-attr:
-    echo "recipe with no exit message"
+[private]
+#^^^^^^^^ meta.annotation.just variable.annotation.just
+attr-test:
 
 [linux]
 #^^^^^^ meta.annotation.just variable.annotation.just
 linux-attr:
-    echo "linux recipe"
 
 [  macos  ]
 #^^^^^^^^^^ meta.annotation.just variable.annotation.just
 macos-attr:
-    echo "macos recipe"
-
-[private]
-#^^^^^^^^ meta.annotation.just variable.annotation.just
-private-attr:
-    echo "private recipe"
 
 [unix   ]
 #^^^^^^^^ meta.annotation.just variable.annotation.just
 unix-attr:
-    echo "unix recipe"
 
 [  windows]
 #^^^^^^^^^^ meta.annotation.just variable.annotation.just
 windows-attr:
-    echo "windows recipe"
 
 
 test-image $PRODUCT $VERSION +IMAGES:
