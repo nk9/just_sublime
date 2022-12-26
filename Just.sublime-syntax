@@ -341,15 +341,23 @@ contexts:
     - include: else-pop
 
   recipe-dependency-with-args:
+    - match: \(
+      scope: punctuation.section.group.begin.just
+      push: recipe-dependency-with-args-body
+
+  recipe-dependency-with-args-body:
+    - meta_scope: meta.group.just
+    - match: '\b{{valid_name}}'
+      scope: entity.name.function.just
+      push:
+        - include: just-expressions
+        - include: else-pop
+    - include: recipe-dependency-group-end
+
+  recipe-dependency-group-end:
     - match: \)
       scope: punctuation.section.group.end.just
-      pop: 1
-    - match: '(\()\s*({{valid_name}})\b'
-      captures:
-        1: punctuation.section.group.begin.just
-        2: entity.name.function.just
-    - include: just-expressions
-    - include: else-pop
+      pop: 2 # End dependency group
 
 
 ###[ RECIPE CONTENTS ]#########################################################

@@ -241,3 +241,18 @@ alias-name:
 export-name:
 # <- meta.function.just entity.name.function.just
 #^^^^^^^^^^ meta.function.just entity.name.function.just
+
+build platform host *args:
+
+hostname := 'host'
+
+_build-toplevel platform *args: (
+#                               ^ punctuation.section.group.begin.just
+  build (platform) (hostname + '.config.system.build.toplevel') (args)
+# ^^^^^ entity.name.function.just
+#       ^^^^^^^^^^ meta.group.just
+#        ^^^^^^^^ variable.other.just
+)
+# <- punctuation.section.group.end.just
+follow-function:
+# <- meta.function.just entity.name.function.just
