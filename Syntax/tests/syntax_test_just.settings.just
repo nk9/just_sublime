@@ -1,4 +1,4 @@
-# SYNTAX TEST "Packages/Just/Just.sublime-syntax"
+# SYNTAX TEST "Packages/Just/Syntax/Just.sublime-syntax"
 
 #
 # Boolean settings

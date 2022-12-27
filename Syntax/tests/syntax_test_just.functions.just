@@ -1,4 +1,4 @@
-# SYNTAX TEST "Packages/Just/Just.sublime-syntax"
+# SYNTAX TEST "Packages/Just/Syntax/Just.sublime-syntax"
 
 var1 := if arch() == 'unix' {"yelaw"} else {if "1" == "1" {uppercase("lapse")} else {"hey"}}
 #                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.statement.conditional.else.just meta.block.just meta.statement.conditional.if.just
