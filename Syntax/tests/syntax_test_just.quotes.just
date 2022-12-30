@@ -36,20 +36,34 @@ stuff := ```
   ```
 # ^^^ string.quoted.backtick.just
 
-single_block := '''
-#               ^^^ string.quoted.single.block.just punctuation.definition.string.begin.just
-Long string
-Many lines
-Hello world'''
-
 single_incorrect_block := ''Testing
 #                         ^^ invalid.illegal.just
 
 double_block := """
-#               ^^^ string.quoted.double.block.just punctuation.definition.string.begin.just
 Long string
 Many lines
 Hello world"""
 
 double_incorrect_block := ""Testing
 #                         ^^ invalid.illegal.just
+
+single_block_with_nested_quotes := '''
+#                                  ^^^ string.quoted.single.block.just punctuation.definition.string.begin.just
+  "Gentlemen," I said, "I've studied the maps
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.single.block.just
+  And if what I'm thinking is right
+'''
+# <- string.quoted.single.block.just punctuation.definition.string.end.just
+#^^ string.quoted.single.block.just punctuation.definition.string.end.just
+
+double_block_with_nested_quotes := """
+#                                  ^^^ string.quoted.double.block.just punctuation.definition.string.begin.just
+  There's another new world at the top of the world
+  For whoever can break through the ice"
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double.block.just
+  I looked round the room
+# ^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double.block.just
+"""
+# <- string.quoted.double.block.just punctuation.definition.string.end.just
+#^^ string.quoted.double.block.just punctuation.definition.string.end.just
+
