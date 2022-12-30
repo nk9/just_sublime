@@ -190,7 +190,9 @@ contexts:
 ###[ CHARACTERS ]##############################################################
 
   strings:
+    - include: single-quote-block-strings
     - include: single-quote-strings
+    - include: double-quote-block-strings
     - include: double-quote-strings
     - include: backtick-quote-strings
 
@@ -207,6 +209,20 @@ contexts:
           scope: punctuation.definition.string.end.just
           pop: 1
 
+  double-quote-block-strings:
+    - match: '""(?=[^"])'
+      scope: invalid.illegal.just
+    - match: '"""'
+      scope: punctuation.definition.string.begin.just
+      push:
+        - meta_scope: string.quoted.double.block.just
+        - meta_include_prototype: false
+        - match: \\.
+          scope: constant.character.escape.just
+        - match: '"""'
+          scope: punctuation.definition.string.end.just
+          pop: 1
+
   double-quote-strings:
     - match: '"'
       scope: punctuation.definition.string.begin.just
@@ -219,14 +235,26 @@ contexts:
           scope: punctuation.definition.string.end.just
           pop: 1
 
+  single-quote-block-strings:
+    - match: "''(?=[^'])"
+      scope: invalid.illegal.just
+    - match: "'''"
+      scope: punctuation.definition.string.begin.just
+      push:
+        - meta_scope: string.quoted.single.block.just
+        - meta_include_prototype: false
+        - match: \\.
+          scope: constant.character.escape.just
+        - match: "'''"
+          scope: punctuation.definition.string.end.just
+          pop: 1
+
   single-quote-strings:
     - match: "'"
       scope: punctuation.definition.string.begin.just
       push:
         - meta_scope: string.quoted.single.just
         - meta_include_prototype: false
-        - match: \\.
-          scope: constant.character.escape.just
         - match: "'"
           scope: punctuation.definition.string.end.just
           pop: 1

@@ -35,27 +35,6 @@ varname := "testme # not a comment" # comment
 #                                   ^^ comment.line.number-sign.just punctuation.definition.comment.begin.just
 #                                     ^^^^^^^ comment.line.number-sign.just
 
-# This backtick evaluates the command `echo foo\necho bar\n`, which produces the value `foo\nbar\n`.
-stuff := ```
-# <- variable.other.just
-#     ^^ keyword.operator.assignment.just
-#        ^^^ string.quoted.backtick.just
-    echo foo
-    echo bar
-#   ^^^^^^^^^ string.quoted.backtick.just
-  ```
-# ^^^ string.quoted.backtick.just
-
-escapes := '\t\n\r\"\\'
-# <- variable.other.just
-#       ^^ keyword.operator.assignment.just
-#          ^^^^^^^^^^^^ string.quoted.single.just
-
-string-with-no-newline := "\
-#                      ^^ keyword.operator.assignment.just
-#                         ^^ string.quoted.double.just
-"
-
 #
 # Export assignments
 #
