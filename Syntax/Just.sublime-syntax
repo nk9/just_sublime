@@ -243,8 +243,6 @@ contexts:
       push:
         - meta_scope: string.quoted.single.block.just
         - meta_include_prototype: false
-        - match: \\.
-          scope: constant.character.escape.just
         - match: "'''"
           scope: punctuation.definition.string.end.just
           pop: 1
