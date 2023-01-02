@@ -289,7 +289,7 @@ contexts:
       scope: meta.annotation.just variable.annotation.just
 
   recipe-definition:
-    - match: '(?=^@?{{valid_name}}[^:]*:[^=])' # Matches 'recipeName:' but not 'varName :='
+    - match: '(?=^@?{{valid_name}}(?![^:]*:=))' # Matches '^recipeName' but not '^varName :='
       push:
         - recipe-name
         - recipe-modifier

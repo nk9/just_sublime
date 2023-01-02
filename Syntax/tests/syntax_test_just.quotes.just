@@ -61,3 +61,15 @@ double_block_with_nested_quotes := """
 # <- string.quoted.double.block.just punctuation.definition.string.end.just
 #^^ string.quoted.double.block.just punctuation.definition.string.end.just
 
+big_echo INPUT=("""
+# <- meta.function.just entity.name.function.just - meta.function.parameters
+#^^^^^^^ meta.function.just entity.name.function.just - meta.function.parameters
+#        ^^^^^^^^^^ meta.function.parameters.just
+#        ^^^^^ variable.parameter.just
+#               ^^^ string.quoted.double.block.just punctuation.definition.string.begin.just
+multiline
+#^^^^^^^^ string.quoted.double.block.just
+test
+"""):
+# <- string.quoted.double.block.just punctuation.definition.string.end.just
+#^^ string.quoted.double.block.just punctuation.definition.string.end.just
