@@ -36,16 +36,10 @@ stuff := ```
   ```
 # ^^^ string.quoted.backtick.just
 
-single_incorrect_block := ''Testing
-#                         ^^ invalid.illegal.just
-
 double_block := """
 Long string
 Many lines
 Hello world"""
-
-double_incorrect_block := ""Testing
-#                         ^^ invalid.illegal.just
 
 single_block_with_nested_quotes := '''
 #                                  ^^^ string.quoted.single.block.just punctuation.definition.string.begin.just

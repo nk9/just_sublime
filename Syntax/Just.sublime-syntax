@@ -210,8 +210,6 @@ contexts:
           pop: 1
 
   double-quote-block-strings:
-    - match: '""(?=[^"])'
-      scope: invalid.illegal.just
     - match: '"""'
       scope: punctuation.definition.string.begin.just
       push:
@@ -236,8 +234,6 @@ contexts:
           pop: 1
 
   single-quote-block-strings:
-    - match: "''(?=[^'])"
-      scope: invalid.illegal.just
     - match: "'''"
       scope: punctuation.definition.string.begin.just
       push:
