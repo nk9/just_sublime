@@ -1,0 +1,10 @@
+<snippet>
+    <content><![CDATA[
+${1:recipe-name} *\$ARGS:
+  #!/usr/bin/env bash
+  set -euxo pipefail
+  echo 'Hello, world!' \$ARGS
+]]></content>
+    <tabTrigger>justbash</tabTrigger>
+    <scope>source.just</scope>
+</snippet>
