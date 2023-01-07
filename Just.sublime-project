@@ -1,0 +1,17 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"on_post_save_project": [
+			{
+				"command": "touch_plugin_py",
+				"args": {},
+				"scope": "window"
+			}
+		]
+	}
+}
