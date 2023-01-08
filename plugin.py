@@ -1,5 +1,3 @@
-# from .plugins.check_justfile_build import *
-
 """Load and Unload all MarkdownEditing modules.
 This module exports __all__ modules, which Sublime Text needs to know about.
 Based on the plugin.py in the MarkdownEditing package:
@@ -33,7 +31,7 @@ class TouchPluginPyCommand(sublime_plugin.WindowCommand):
     def run(self):
         variables = self.window.extract_variables()
         path = Path(variables["file"])
+        plugin = Path(variables["project_path"]) / "plugin.py"
 
-        if path.suffix == ".py":
-            plugin = Path(variables["project_path"]) / "plugin.py"
+        if plugin != path and path.suffix == ".py":
             plugin.touch()
