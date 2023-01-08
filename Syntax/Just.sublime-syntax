@@ -448,8 +448,6 @@ contexts:
       push:
         - meta_scope: meta.string.just string.quoted.single.just
         - meta_include_prototype: false
-        - match: \\.
-          scope: constant.character.escape.just
         - match: "'"
           scope: punctuation.definition.string.end.just
           pop: 1
