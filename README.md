@@ -1,6 +1,6 @@
 # This Package is Just Sublime
 
-This package contains a few different tools to help you make the most of the [`just` command runner](https://just.systems).
+Several tools to help you make the most of the [`just` command runner](https://just.systems). Requires Just version 1.10.0.
 
 ## Syntax Highlighting
 
@@ -10,7 +10,7 @@ The Sublime syntax was based on the one originally made by [TonioGela](https://g
    srcset="assets/settings_variables.png, assets/settings_variables@2x.png 2x"
    src="assets/settings_variables.png"
    title="Settings and Variables"
-   alt="Settings and Variables"
+   alt="Screenshot showing syntax highlighting for settings and variables"
    />
 
 ![interpolation](assets/interpolation.png)
