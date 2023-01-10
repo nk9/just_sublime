@@ -3,10 +3,10 @@ This module exports __all__ modules, which Sublime Text needs to know about.
 Based on the plugin.py in the MarkdownEditing package:
 https://github.com/SublimeText-Markdown/MarkdownEditing/blob/master/plugin.py
 """
+from pathlib import Path
+
 import sublime
 import sublime_plugin
-
-from pathlib import Path
 
 if int(sublime.version()) < 3176:
     print(__package__ + " requires ST3 3176+")
@@ -16,9 +16,7 @@ else:
     # clear modules cache if package is reloaded (after update?)
     prefix = __package__ + "."  # don't clear the base package
     for module_name in [
-        module_name
-        for module_name in sys.modules
-        if module_name.startswith(prefix) and module_name != __name__
+        module_name for module_name in sys.modules if module_name.startswith(prefix) and module_name != __name__
     ]:
         del sys.modules[module_name]
     prefix = None

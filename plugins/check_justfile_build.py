@@ -1,29 +1,22 @@
-import sublime
+import re
+import shlex
+import subprocess
+
 import sublime_plugin
-
-import shlex, subprocess
-import threading
-import os
-import sys
-
-# from Default.exec import ExecCommand
 
 
 class CheckJustfileBuildCommand(sublime_plugin.WindowCommand):
     def run(self, **kwargs):
-        print("Python version: ", sys.version)
         # Creating the panel implicitly clears any previous contents
         self.panel = self.window.create_output_panel("exec")
         self.window.run_command("show_panel", {"panel": "output.exec"})
 
         # Get the list of variables known to build systems
         variables = self.window.extract_variables()
-        print("var=", variables)
-        print(kwargs)
 
         # Is there a file path? There won't be if the file hasn't been saved yet.
         if "file" in variables:
-            self.write("Checking %s\n" % variables["file"])
+            self.write(f"Checking {variables['file']}\n")
 
             try:
                 args = shlex.split(kwargs["shell_cmd"])
