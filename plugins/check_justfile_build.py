@@ -9,8 +9,8 @@ import sublime_plugin
 class CheckJustfileBuildCommand(sublime_plugin.WindowCommand):
     def run(self, **kwargs):
         # Creating the panel implicitly clears any previous contents
-        self.panel = self.window.create_output_panel("exec")
-        self.window.run_command("show_panel", {"panel": "output.exec"})
+        self.panel = self.window.create_output_panel("check_justfile")
+        self.window.run_command("show_panel", {"panel": "output.check_justfile"})
 
         # Get the list of variables known to build systems
         variables = self.window.extract_variables()
