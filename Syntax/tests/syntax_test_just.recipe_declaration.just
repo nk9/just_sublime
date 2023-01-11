@@ -23,11 +23,11 @@ _bar2 foo_stuff:
 b: a && d (_bar2 justfile())
 # <- meta.function.just entity.name.function.just
 #^ keyword.operator.assignment.just
-#  ^ entity.name.function.just
+#  ^ variable.function.just
 #    ^^ keyword.operator.logical.just
-#       ^ entity.name.function.just 
+#       ^ variable.function.just 
 #         ^ punctuation.section.group.begin.just
-#          ^^^^^ entity.name.function.just
+#          ^^^^^ variable.function.just
 #                ^^^^^^^^ meta.function-call.identifier.just support.function.builtin.just
 #                        ^^ meta.function-call.arguments.just
 #                        ^ punctuation.section.group.begin.just
@@ -94,8 +94,8 @@ variadic $VAR1_1 VAR2 VAR3 VAR4=("a") +$FLAGS='-q': foo2 braces
 #                                            ^ keyword.operator.assignment.just
 #                                             ^^^^ string.quoted.single.just
 #                                                 ^ keyword.operator.assignment.just
-#                                                   ^^^^ entity.name.function.just
-#                                                        ^^^^^^ entity.name.function.just
+#                                                   ^^^^ variable.function.just
+#                                                        ^^^^^^ variable.function.just
   cargo test {{FLAGS}}
 
 script2 *ARGS:
@@ -132,11 +132,11 @@ target := "main"
 build: script2 (_build target) script3
 #^^^^ meta.function.just entity.name.function.just
 #    ^ keyword.operator.assignment.just
-#      ^^^^^^^ entity.name.function.just
-#               ^^^^^^ entity.name.function.just
+#      ^^^^^^^ variable.function.just
+#               ^^^^^^ variable.function.just
 #                      ^^^^^^ variable.other.just
 #                            ^ punctuation.section.group.end.just
-#                              ^^^^^^^ entity.name.function.just
+#                              ^^^^^^^ variable.function.just
 
 r3-:
 #^^ meta.function.just entity.name.function.just
@@ -249,7 +249,7 @@ hostname := 'host'
 _build-toplevel platform *args: (
 #                               ^ punctuation.section.group.begin.just
   build (platform) (hostname + '.config.system.build.toplevel') (args)
-# ^^^^^ entity.name.function.just
+# ^^^^^ variable.function.just
 #       ^^^^^^^^^^ meta.group.just
 #        ^^^^^^^^ variable.other.just
 )

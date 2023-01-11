@@ -9,7 +9,7 @@ alias s := serve
 #^^^^ support.function.export.just
 #     ^ variable.other.just
 #       ^^ keyword.operator.assignment.just
-#          ^^^^^ entity.name.function.just
+#          ^^^^^ variable.function.just
 
 # Aliases with leading whitespace aren't valid
  alias fail := nope

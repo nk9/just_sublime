@@ -84,7 +84,7 @@ contexts:
         1: support.function.export.just
         2: variable.other.just
         3: keyword.operator.assignment.just
-        4: entity.name.function.just
+        4: variable.function.just
 
 
 ###[ STATEMENTS ]##############################################################
@@ -356,7 +356,7 @@ contexts:
     - match: (?=\()
       push: recipe-dependency-with-args
     - match: '\b{{valid_name}}\b'
-      scope: entity.name.function.just
+      scope: variable.function.just
     - match: '&&'
       scope: keyword.operator.logical.just
     - include: eol-pop
@@ -370,7 +370,7 @@ contexts:
   recipe-dependency-with-args-body:
     - meta_scope: meta.group.just
     - match: '\b{{valid_name}}'
-      scope: entity.name.function.just
+      scope: variable.function.just
       push:
         - include: just-expressions
         - include: else-pop
