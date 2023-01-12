@@ -26,7 +26,13 @@ class CheckJustfileBuildCommand(sublime_plugin.WindowCommand):
                 if result.returncode == 0:
                     self.write("File OK.")
                 else:
-                    self.format_output(result.stderr.decode())
+                    if len(result.stdout):
+                        # In new versions of just, the diff is sent to stdout
+                        self.format_output(result.stdout.decode())
+                        self.write(result.stderr.decode())
+                    else:
+                        # In older versions of just, all output comes through stderr
+                        self.format_output(result.stderr.decode())
             except subprocess.CalledProcessError as err:
                 self.write("ERROR: " + err.output.decode())
             except Exception as e:
