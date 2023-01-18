@@ -25,7 +25,7 @@ b: a && d (_bar2 justfile())
 #^ keyword.operator.assignment.just
 #  ^ variable.function.just
 #    ^^ keyword.operator.logical.just
-#       ^ variable.function.just 
+#       ^ variable.function.just
 #         ^ punctuation.section.group.begin.just
 #          ^^^^^ variable.function.just
 #                ^^^^^^^^ meta.function-call.identifier.just support.function.builtin.just
@@ -104,11 +104,16 @@ script2 *ARGS:
 #        ^^^^ meta.function.parameters.just variable.parameter.just
 #            ^ keyword.operator.assignment.just
     {{ python }} script2.py {{ ARGS }}
+#   ^^^^^^^^^^^^ source.shell.embedded.just meta.function-call.identifier.shell meta.interpolation.just
+#               ^^^^^^^^^^^^^^^^^^^^^^ source.shell.embedded.just meta.function-call.arguments.shell
+#                           ^^^^^^^^^^ meta.interpolation.just
 
 script3:
     #!/usr/bin/python3
-#   ^^^^^^^^^^^^^^^^^^ comment.line.shebang.just
-    print("hello world")
+#   ^ source.python.embedded.just comment.line.number-sign.python punctuation.definition.comment.python
+#    ^^^^^^^^^^^^^^^^^ source.python.embedded.just comment.line.number-sign.python
+    print("hello {{ ARGS }} world")
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.python.embedded.just
 
 
 #
@@ -116,16 +121,15 @@ script3:
 #
 _build version:
     @-echo 'Building {{justfile() + "string"}}…'
-#          ^^^^^^^^^^ meta.string.just string.quoted.single.just - meta.interpolation
-#                    ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.just meta.interpolation.just - string.quoted.single
-#                                             ^^ meta.string.just string.quoted.single.just - meta.interpolation
+#          ^^^^^^^^^^ meta.string.shell string.quoted.single.shell - meta.interpolation
+#                    ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.shell meta.interpolation.just - string.quoted.single
+#                                             ^^ meta.string.shell string.quoted.single.shell - meta.interpolation
 #                      ^^^^^^^^ meta.function-call.identifier.just support.function.builtin.just
 #                              ^ meta.function-call.arguments.just punctuation.section.group.begin.just
 #                               ^ meta.function-call.arguments.just punctuation.section.group.end.just
 #                                 ^ keyword.operator.arithmetic.just
 #                                   ^^^^^^^^ string.quoted.double.just
-#                                           ^^ punctuation.section.interpolation.end.just
-    cd {{version}} && make
+#                                           ^^ punctuation.section.interpolation.end.just    cd {{version}} && make
 
 # Argument to dependency
 target := "main"

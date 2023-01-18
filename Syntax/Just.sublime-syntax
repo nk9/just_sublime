@@ -58,7 +58,6 @@ contexts:
     - include: assignment
     - include: recipe-attribute
     - include: recipe-definition
-    - include: recipe-contents
 
   prototype:
     - include: comments
@@ -291,6 +290,7 @@ contexts:
   recipe-definition:
     - match: '(?=^@?{{valid_name}}(?![^:]*:=))' # Matches '^recipeName' but not '^varName :='
       push:
+        - recipe-body
         - recipe-name
         - recipe-modifier
 
@@ -381,15 +381,22 @@ contexts:
       scope: punctuation.section.group.end.just
       pop: 2 # End dependency group
 
+  recipe-body:
+    # python script identified via shebang
+    - match: ^\s+(?=#!.*\bpython(?:\d(?:\.\d+)?)?\b)
+      pop: 1
+      embed: scope:source.python.embedded.just
+      escape: ^(?=\S)
+    # shell script is default
+    # TODO: Must fix. The default shell can be set using a variable, so may not be bash.
+    - match: ^
+      pop: 1
+      embed: scope:source.shell.embedded.just
+      escape: ^(?=\S)
 
 ###[ RECIPE CONTENTS ]#########################################################
 
-  recipe-contents:
-    - match: '(?=^\s+)'
-      comment: Recipe contents are always indented
-      push: recipe-content-line
-
-  recipe-content-line:
+  recipe-content-modifiers:
     - match: '^\s+((@)|(-)(@)|(-)|(@)(-))(?!-)'
       captures:
         2: storage.modifier.quiet.just
@@ -398,10 +405,6 @@ contexts:
         5: storage.modifier.ignore-error.just
         6: storage.modifier.quiet.just
         7: storage.modifier.ignore-error.just
-    - include: recipe-content-interpolations
-    - include: recipe-content-strings
-    - include: recipe-content-shebang
-    - include: eol-pop
 
   recipe-content-interpolations:
     - match: '\{\{\{\{'
@@ -420,38 +423,38 @@ contexts:
   # Sadly, almost an exact duplicate of the 'strings' context, but
   # needed to include interpolations, which would have to be nested
   # inside a push: in the other context.
-  recipe-content-strings:
-    - match: '`'
-      scope: punctuation.definition.string.begin.just
-      push:
-        - meta_scope: meta.string.just string.quoted.backtick.just
-        - meta_include_prototype: false
-        - match: \\.
-          scope: constant.character.escape.just
-        - match: '`'
-          scope: punctuation.definition.string.end.just
-          pop: 1
-        - include: recipe-content-string-interpolations
-    - match: '"'
-      scope: punctuation.definition.string.begin.just
-      push:
-        - meta_scope: meta.string.just string.quoted.double.just
-        - meta_include_prototype: false
-        - match: \\.
-          scope: constant.character.escape.just
-        - match: '"'
-          scope: punctuation.definition.string.end.just
-          pop: 1
-        - include: recipe-content-string-interpolations
-    - match: "'"
-      scope: punctuation.definition.string.begin.just
-      push:
-        - meta_scope: meta.string.just string.quoted.single.just
-        - meta_include_prototype: false
-        - match: "'"
-          scope: punctuation.definition.string.end.just
-          pop: 1
-        - include: recipe-content-string-interpolations
+  # recipe-content-strings:
+  #   - match: '`'
+  #     scope: punctuation.definition.string.begin.just
+  #     push:
+  #       - meta_scope: meta.string.just string.quoted.backtick.just
+  #       - meta_include_prototype: false
+  #       - match: \\.
+  #         scope: constant.character.escape.just
+  #       - match: '`'
+  #         scope: punctuation.definition.string.end.just
+  #         pop: 1
+  #       - include: recipe-content-string-interpolations
+  #   - match: '"'
+  #     scope: punctuation.definition.string.begin.just
+  #     push:
+  #       - meta_scope: meta.string.just string.quoted.double.just
+  #       - meta_include_prototype: false
+  #       - match: \\.
+  #         scope: constant.character.escape.just
+  #       - match: '"'
+  #         scope: punctuation.definition.string.end.just
+  #         pop: 1
+  #       - include: recipe-content-string-interpolations
+  #   - match: "'"
+  #     scope: punctuation.definition.string.begin.just
+  #     push:
+  #       - meta_scope: meta.string.just string.quoted.single.just
+  #       - meta_include_prototype: false
+  #       - match: "'"
+  #         scope: punctuation.definition.string.end.just
+  #         pop: 1
+  #       - include: recipe-content-string-interpolations
 
   recipe-content-string-interpolations:
     - match: '\{\{\{\{'
@@ -464,14 +467,6 @@ contexts:
     - clear_scopes: 1
     - meta_scope: meta.interpolation.just
     - include: recipe-content-interpolation-body
-
-  recipe-content-shebang:
-    - match: '^\s+#\!'
-      comment: The #! lines within a recipe.
-      push:
-        - meta_scope: comment.line.shebang.just
-        - match: $
-          pop: 1
 
 
 ###[ Set Expressions ]#########################################################
