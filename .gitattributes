@@ -10,4 +10,8 @@
 /.git*      export-ignore
 /*.md       export-ignore
 
-/packages.json  export-ignore
+/pyproject.toml     export-ignore
+/packages.json      export-ignore
+/setup.cfg          export-ignore
+/*.sublime-project  export-ignore
+/justfile           export-ignore
