@@ -382,17 +382,29 @@ contexts:
       pop: 2 # End dependency group
 
   recipe-body:
-    # python script identified via shebang
+    # Python script shebang
     - match: ^\s+(?=#!.*\bpython(?:\d(?:\.\d+)?)?\b)
       pop: 1
       embed: scope:source.python.embedded.just
       escape: ^(?=\S)
-    # shell script is default
-    # TODO: Must fix. The default shell can be set using a variable, so may not be bash.
-    - match: ^
+    # Shell script shebang
+    - match: ^\s+(?=#!.*\b(bash|zsh|sh)\b)
       pop: 1
       embed: scope:source.shell.embedded.just
       escape: ^(?=\S)
+    # Regular recipe body
+    - match: '^\s+\S'
+      meta_scope: meta.function.just
+      push:
+        - recipe-content-interpolations
+        - recipe-content-modifiers
+    - include: else-pop
+    # shell script is default
+    # - match: ^
+    #   comment: Nothing particular
+      # pop: 1
+      # embed: scope:source.shell.embedded.just
+      # escape: ^(?=\S)
 
 ###[ RECIPE CONTENTS ]#########################################################
 

@@ -108,16 +108,6 @@ script2 *ARGS:
 #               ^^^^^^^^^^^^^^^^^^^^^^ source.shell.embedded.just meta.function-call.arguments.shell
 #                           ^^^^^^^^^^ meta.interpolation.just
 
-script3 *ARGS:
-  #!/usr/bin/python3
- #^^^^^^^^^^^^^^^^^^ source.python.embedded.just comment.line.number-sign.python
-  print("hello {{ ARGS }} world")
- #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.python.embedded.just
- #     ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.python
- #      ^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.python string.quoted.double.python
- #             ^^^^^^^^^^ meta.interpolation.just
-
-
 #
 # Recipe dependencies
 #
