@@ -420,7 +420,7 @@ contexts:
       pop: 1
 
   recipe-content-modifiers:
-    - match: '^\s+((@)|(-)(@)|(-)|(@)(-))'
+    - match: '^\s+((@)|(-)(@)|(-)|(@)(-))(?!-)'
       captures:
         2: storage.modifier.quiet.just
         3: storage.modifier.ignore-error.just

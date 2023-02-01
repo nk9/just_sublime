@@ -14,7 +14,6 @@ _bar2 foo_stuff:
 #     ^^^^^^^^^ meta.function.parameters.just variable.parameter.just
 #              ^ keyword.operator.assignment.just
   @echo {{ if foo_stuff == "bar" { "hello" } else { "goodbye" } }}
-# ^ storage.modifier.quiet.just
 
 @a:
 # <- meta.function.just storage.modifier.quiet.just
