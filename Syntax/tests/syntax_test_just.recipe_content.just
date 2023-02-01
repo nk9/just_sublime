@@ -51,3 +51,10 @@ bar foo:
 test3 target tests=path_1:
     @echo 'Testing {{ target }}:{{ tests }}…'
 #                     ^^^^^^ meta.interpolation.just variable.other.just
+
+newline-hyphens:
+  -find . -type d \
+    -exec \
+#         ^ punctuation.separator.continuation.line.just
+#   ^ - storage.modifier.ignore-error.just
+    ls -ld {} \;

@@ -104,8 +104,7 @@ script2 *ARGS:
 #        ^^^^ meta.function.parameters.just variable.parameter.just
 #            ^ keyword.operator.assignment.just
     {{ python }} script2.py {{ ARGS }}
-#   ^^^^^^^^^^^^ source.shell.embedded.just meta.function-call.identifier.shell meta.interpolation.just
-#               ^^^^^^^^^^^^^^^^^^^^^^ source.shell.embedded.just meta.function-call.arguments.shell
+#   ^^^^^^^^^^^^ meta.interpolation.just
 #                           ^^^^^^^^^^ meta.interpolation.just
 
 #
@@ -113,15 +112,16 @@ script2 *ARGS:
 #
 _build version:
     @-echo 'Building {{justfile() + "string"}}…'
-#          ^^^^^^^^^^ meta.string.shell string.quoted.single.shell - meta.interpolation
-#                    ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.shell meta.interpolation.just - string.quoted.single
-#                                             ^^ meta.string.shell string.quoted.single.shell - meta.interpolation
+#          ^^^^^^^^^^ meta.string.just string.quoted.single.just - meta.interpolation
+#                    ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.just meta.interpolation.just - string.quoted.single
+#                                             ^^ meta.string.just string.quoted.single.just - meta.interpolation
 #                      ^^^^^^^^ meta.function-call.identifier.just support.function.builtin.just
 #                              ^ meta.function-call.arguments.just punctuation.section.group.begin.just
 #                               ^ meta.function-call.arguments.just punctuation.section.group.end.just
 #                                 ^ keyword.operator.arithmetic.just
 #                                   ^^^^^^^^ string.quoted.double.just
-#                                           ^^ punctuation.section.interpolation.end.just    cd {{version}} && make
+#                                           ^^ punctuation.section.interpolation.end.just
+    cd {{version}} && make
 
 # Argument to dependency
 target := "main"

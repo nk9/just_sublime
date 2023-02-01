@@ -58,6 +58,7 @@ contexts:
     - include: assignment
     - include: recipe-attribute
     - include: recipe-definition
+    - include: recipe-generic-line
 
   prototype:
     - include: comments
@@ -392,24 +393,34 @@ contexts:
       pop: 1
       embed: scope:source.shell.embedded.just
       escape: ^(?=\S)
-    # Regular recipe body
-    - match: '^\s+\S'
-      meta_scope: meta.function.just
-      push:
-        - recipe-content-interpolations
-        - recipe-content-modifiers
-    - include: else-pop
-    # shell script is default
-    # - match: ^
-    #   comment: Nothing particular
-      # pop: 1
-      # embed: scope:source.shell.embedded.just
-      # escape: ^(?=\S)
+    - match: ^
+      comment: Content using the default shell
+      pop: 1
 
 ###[ RECIPE CONTENTS ]#########################################################
 
+  recipe-generic-line:
+    - match: ^(?=\s+\S)
+      push:
+        - recipe-generic-content
+        - recipe-content-modifiers
+
+  recipe-generic-content:
+    - include: recipe-content-interpolations
+    - include: recipe-content-strings
+    - match: '(\\)$\n?'
+      captures:
+        1: punctuation.separator.continuation.line.just
+    - match: '$\n'
+      comment: |
+        No trailing '?', so this will NOT match lines matched by the previous rule.
+        There is no pop there, so this context will remain on the stack WITHOUT the
+        recipe-content-modifiers. This ensures those modifiers are matched
+        IFF they occur at the beginning of non-continuation lines.
+      pop: 1
+
   recipe-content-modifiers:
-    - match: '^\s+((@)|(-)(@)|(-)|(@)(-))(?!-)'
+    - match: '^\s+((@)|(-)(@)|(-)|(@)(-))'
       captures:
         2: storage.modifier.quiet.just
         3: storage.modifier.ignore-error.just
@@ -417,6 +428,7 @@ contexts:
         5: storage.modifier.ignore-error.just
         6: storage.modifier.quiet.just
         7: storage.modifier.ignore-error.just
+    - include: else-pop
 
   recipe-content-interpolations:
     - match: '\{\{\{\{'
@@ -435,7 +447,7 @@ contexts:
   # Sadly, almost an exact duplicate of the 'strings' context, but
   # needed to include interpolations, which would have to be nested
   # inside a push: in the other context.
-  # recipe-content-strings:
+  recipe-content-strings:
   #   - match: '`'
   #     scope: punctuation.definition.string.begin.just
   #     push:
@@ -447,26 +459,26 @@ contexts:
   #         scope: punctuation.definition.string.end.just
   #         pop: 1
   #       - include: recipe-content-string-interpolations
-  #   - match: '"'
-  #     scope: punctuation.definition.string.begin.just
-  #     push:
-  #       - meta_scope: meta.string.just string.quoted.double.just
-  #       - meta_include_prototype: false
-  #       - match: \\.
-  #         scope: constant.character.escape.just
-  #       - match: '"'
-  #         scope: punctuation.definition.string.end.just
-  #         pop: 1
-  #       - include: recipe-content-string-interpolations
-  #   - match: "'"
-  #     scope: punctuation.definition.string.begin.just
-  #     push:
-  #       - meta_scope: meta.string.just string.quoted.single.just
-  #       - meta_include_prototype: false
-  #       - match: "'"
-  #         scope: punctuation.definition.string.end.just
-  #         pop: 1
-  #       - include: recipe-content-string-interpolations
+    - match: '"'
+      scope: punctuation.definition.string.begin.just
+      push:
+        - meta_scope: meta.string.just string.quoted.double.just
+        - meta_include_prototype: false
+        - match: \\.
+          scope: constant.character.escape.just
+        - match: '"'
+          scope: punctuation.definition.string.end.just
+          pop: 1
+        - include: recipe-content-string-interpolations
+    - match: "'"
+      scope: punctuation.definition.string.begin.just
+      push:
+        - meta_scope: meta.string.just string.quoted.single.just
+        - meta_include_prototype: false
+        - match: "'"
+          scope: punctuation.definition.string.end.just
+          pop: 1
+        - include: recipe-content-string-interpolations
 
   recipe-content-string-interpolations:
     - match: '\{\{\{\{'
