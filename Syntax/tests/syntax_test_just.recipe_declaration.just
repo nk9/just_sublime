@@ -14,7 +14,6 @@ _bar2 foo_stuff:
 #     ^^^^^^^^^ meta.function.parameters.just variable.parameter.just
 #              ^ keyword.operator.assignment.just
   @echo {{ if foo_stuff == "bar" { "hello" } else { "goodbye" } }}
-# ^ storage.modifier.quiet.just
 
 @a:
 # <- meta.function.just storage.modifier.quiet.just
@@ -25,7 +24,7 @@ b: a && d (_bar2 justfile())
 #^ keyword.operator.assignment.just
 #  ^ variable.function.just
 #    ^^ keyword.operator.logical.just
-#       ^ variable.function.just 
+#       ^ variable.function.just
 #         ^ punctuation.section.group.begin.just
 #          ^^^^^ variable.function.just
 #                ^^^^^^^^ meta.function-call.identifier.just support.function.builtin.just
@@ -104,12 +103,8 @@ script2 *ARGS:
 #        ^^^^ meta.function.parameters.just variable.parameter.just
 #            ^ keyword.operator.assignment.just
     {{ python }} script2.py {{ ARGS }}
-
-script3:
-    #!/usr/bin/python3
-#   ^^^^^^^^^^^^^^^^^^ comment.line.shebang.just
-    print("hello world")
-
+#   ^^^^^^^^^^^^ meta.interpolation.just
+#                           ^^^^^^^^^^ meta.interpolation.just
 
 #
 # Recipe dependencies

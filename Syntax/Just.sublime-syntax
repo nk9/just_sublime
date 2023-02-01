@@ -58,7 +58,7 @@ contexts:
     - include: assignment
     - include: recipe-attribute
     - include: recipe-definition
-    - include: recipe-contents
+    - include: recipe-generic-line
 
   prototype:
     - include: comments
@@ -291,6 +291,7 @@ contexts:
   recipe-definition:
     - match: '(?=^@?{{valid_name}}(?![^:]*:=))' # Matches '^recipeName' but not '^varName :='
       push:
+        - recipe-body
         - recipe-name
         - recipe-modifier
 
@@ -381,15 +382,44 @@ contexts:
       scope: punctuation.section.group.end.just
       pop: 2 # End dependency group
 
+  recipe-body:
+    # Python script shebang
+    - match: ^\s+(?=#!.*\bpython(?:\d(?:\.\d+)?)?\b)
+      pop: 1
+      embed: scope:source.python.embedded.just
+      escape: ^(?=\S)
+    # Shell script shebang
+    - match: ^\s+(?=#!.*\b(bash|zsh|sh)\b)
+      pop: 1
+      embed: scope:source.shell.embedded.just
+      escape: ^(?=\S)
+    - match: ^
+      comment: Content using the default shell
+      pop: 1
 
 ###[ RECIPE CONTENTS ]#########################################################
 
-  recipe-contents:
-    - match: '(?=^\s+)'
-      comment: Recipe contents are always indented
-      push: recipe-content-line
+  recipe-generic-line:
+    - match: ^(?=\s+\S)
+      push:
+        - recipe-generic-content
+        - recipe-content-modifiers
 
-  recipe-content-line:
+  recipe-generic-content:
+    - include: recipe-content-interpolations
+    - include: recipe-content-strings
+    - match: '(\\)$\n?'
+      captures:
+        1: punctuation.separator.continuation.line.just
+    - match: '$\n'
+      comment: |
+        No trailing '?', so this will NOT match lines matched by the previous rule.
+        There is no pop there, so this context will remain on the stack WITHOUT the
+        recipe-content-modifiers. This ensures those modifiers are matched
+        IFF they occur at the beginning of non-continuation lines.
+      pop: 1
+
+  recipe-content-modifiers:
     - match: '^\s+((@)|(-)(@)|(-)|(@)(-))(?!-)'
       captures:
         2: storage.modifier.quiet.just
@@ -398,10 +428,7 @@ contexts:
         5: storage.modifier.ignore-error.just
         6: storage.modifier.quiet.just
         7: storage.modifier.ignore-error.just
-    - include: recipe-content-interpolations
-    - include: recipe-content-strings
-    - include: recipe-content-shebang
-    - include: eol-pop
+    - include: else-pop
 
   recipe-content-interpolations:
     - match: '\{\{\{\{'
@@ -421,17 +448,17 @@ contexts:
   # needed to include interpolations, which would have to be nested
   # inside a push: in the other context.
   recipe-content-strings:
-    - match: '`'
-      scope: punctuation.definition.string.begin.just
-      push:
-        - meta_scope: meta.string.just string.quoted.backtick.just
-        - meta_include_prototype: false
-        - match: \\.
-          scope: constant.character.escape.just
-        - match: '`'
-          scope: punctuation.definition.string.end.just
-          pop: 1
-        - include: recipe-content-string-interpolations
+  #   - match: '`'
+  #     scope: punctuation.definition.string.begin.just
+  #     push:
+  #       - meta_scope: meta.string.just string.quoted.backtick.just
+  #       - meta_include_prototype: false
+  #       - match: \\.
+  #         scope: constant.character.escape.just
+  #       - match: '`'
+  #         scope: punctuation.definition.string.end.just
+  #         pop: 1
+  #       - include: recipe-content-string-interpolations
     - match: '"'
       scope: punctuation.definition.string.begin.just
       push:
@@ -464,14 +491,6 @@ contexts:
     - clear_scopes: 1
     - meta_scope: meta.interpolation.just
     - include: recipe-content-interpolation-body
-
-  recipe-content-shebang:
-    - match: '^\s+#\!'
-      comment: The #! lines within a recipe.
-      push:
-        - meta_scope: comment.line.shebang.just
-        - match: $
-          pop: 1
 
 
 ###[ Set Expressions ]#########################################################

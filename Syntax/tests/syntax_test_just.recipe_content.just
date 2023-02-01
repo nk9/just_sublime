@@ -51,3 +51,33 @@ bar foo:
 test3 target tests=path_1:
     @echo 'Testing {{ target }}:{{ tests }}…'
 #                     ^^^^^^ meta.interpolation.just variable.other.just
+
+newline-hyphens:
+  -find . -type d \
+    -exec \
+#         ^ punctuation.separator.continuation.line.just
+#   ^ - storage.modifier.ignore-error.just
+    ls -ld {} \;
+
+a:
+  @echo "hi"
+# ^ storage.modifier.quiet.just
+
+b:
+  -echo "hi"
+# ^ storage.modifier.ignore-error.just
+
+c:
+  @-echo "hi"
+# ^ storage.modifier.quiet.just
+#  ^ storage.modifier.ignore-error.just
+
+d:
+  -@echo "hi"
+# ^ storage.modifier.ignore-error.just
+#  ^ storage.modifier.quiet.just
+
+line-prefix-for-default-shell-only:
+  #!/usr/bin/sh
+  -echo "hi"
+ #^ - storage.modifier.ignore-error.just

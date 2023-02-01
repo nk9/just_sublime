@@ -1,0 +1,19 @@
+%YAML 1.2
+---
+name: Python (for Just) v1
+scope: source.python.embedded.just
+# Version needs to match the one that ships with Sublime. v1 as of Jan 2023.
+version: 1
+hidden: true
+
+extends: Packages/Python/Python.sublime-syntax
+
+contexts:
+  prototype:
+    - meta_prepend: true
+    - include: scope:source.just#recipe-content-interpolations
+
+  string-prototype:
+    # Note: not yet supported by ST 4143/4146 (it's in preparation)
+    - meta_prepend: true
+    - include: scope:source.just#recipe-content-string-interpolations
