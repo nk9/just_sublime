@@ -81,3 +81,9 @@ line-prefix-for-default-shell-only:
   #!/usr/bin/sh
   -echo "hi"
  #^ - storage.modifier.ignore-error.just
+
+continuation-with-strings-and-interpolation NAME:
+  find . -type f \
+    -name {{NAME}} -not -path "*.mp3"
+#         ^^^^^^^^ meta.interpolation.just
+#                             ^^^^^^^ meta.string.just string.quoted.double.just
