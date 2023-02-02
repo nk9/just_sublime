@@ -1,7 +1,7 @@
 		{
 			"name": "Just",
 			"details": "https://github.com/nk9/just_sublime",
-			"labels": ["language syntax", "build system"],
+			"labels": ["language syntax", "build system", "snippets"],
 			"releases": [
 				{
 					"sublime_text": ">=4075",
