@@ -21,28 +21,28 @@ double_escapes := "\t\n\r\"\\"
 backtick_code := `echo 'hello'`
 #                ^ punctuation.section.interpolation.begin.just
 #                             ^ punctuation.section.interpolation.end.just
-#                ^^^^^^^^^^^^^^ meta.interpolation.command.shell
+#                ^^^^^^^^^^^^^^ meta.string.shell meta.interpolation.command.shell
 
 # Just interpolation doesn't work inside backticks
 backtick_no_interp := `echo {{single_backslash}}`
-#                      ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.interpolation.command.shell - meta.interpolation.just
+#                      ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.shell meta.interpolation.command.shell - meta.interpolation.just
 
 CUR_DIR_NAME := ```
 #               ^^^ punctuation.section.interpolation.begin.just
 basename `pwd`
-#^^^^^^^^^^^^^ meta.interpolation.command.shell
+#^^^^^^^^^^^^^ meta.string.shell meta.interpolation.command.shell
 ```
 
 # This backtick evaluates the command `echo foo\necho bar\n`, which produces the value `foo\nbar\n`.
 stuff := ```
 # <- variable.other.just
 #     ^^ keyword.operator.assignment.just
-#        ^^^ meta.interpolation.command.shell punctuation.section.interpolation.begin.just
+#        ^^^ meta.string.shell meta.interpolation.command.shell punctuation.section.interpolation.begin.just
     echo foo
     echo bar
-#   ^^^^^^^^ meta.interpolation.command.shell
+#   ^^^^^^^^ meta.string.shell meta.interpolation.command.shell
   ```
-# ^^^ punctuation.section.interpolation.end.just
+# ^^^ meta.string.shell punctuation.section.interpolation.end.just
 
 single_block_with_nested_quotes := '''
 #                                  ^^^ string.quoted.single.block.just punctuation.definition.string.begin.just

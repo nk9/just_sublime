@@ -202,7 +202,7 @@ contexts:
     - match: '```'
       scope: punctuation.section.interpolation.begin.just
       push:
-        - meta_scope: meta.interpolation.command.shell
+        - meta_scope: meta.string.shell meta.interpolation.command.shell
         - meta_include_prototype: false
         - match: '```'
           scope: punctuation.section.interpolation.end.just
@@ -213,7 +213,7 @@ contexts:
     - match: '`'
       scope: punctuation.section.interpolation.begin.just
       push:
-        - meta_scope: meta.interpolation.command.shell
+        - meta_scope: meta.string.shell meta.interpolation.command.shell
         - meta_include_prototype: false
         - match: '`'
           scope: punctuation.section.interpolation.end.just
