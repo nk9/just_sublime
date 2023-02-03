@@ -194,19 +194,29 @@ contexts:
     - include: single-quote-strings
     - include: double-quote-block-strings
     - include: double-quote-strings
+    - include: backtick-quote-block-strings
     - include: backtick-quote-strings
+
+
+  backtick-quote-block-strings:
+    - match: '```'
+      scope: punctuation.section.interpolation.begin.just
+      push:
+        - meta_scope: meta.interpolation.command.shell
+        - meta_include_prototype: false
+        - match: '```'
+          scope: punctuation.section.interpolation.end.just
+          pop: 1
 
 
   backtick-quote-strings:
     - match: '`'
-      scope: punctuation.definition.string.begin.just
+      scope: punctuation.section.interpolation.begin.just
       push:
-        - meta_scope: string.quoted.backtick.just
+        - meta_scope: meta.interpolation.command.shell
         - meta_include_prototype: false
-        - match: \\.
-          scope: constant.character.escape.just
         - match: '`'
-          scope: punctuation.definition.string.end.just
+          scope: punctuation.section.interpolation.end.just
           pop: 1
 
   double-quote-block-strings:
@@ -448,17 +458,6 @@ contexts:
   # needed to include interpolations, which would have to be nested
   # inside a push: in the other context.
   recipe-content-strings:
-  #   - match: '`'
-  #     scope: punctuation.definition.string.begin.just
-  #     push:
-  #       - meta_scope: meta.string.just string.quoted.backtick.just
-  #       - meta_include_prototype: false
-  #       - match: \\.
-  #         scope: constant.character.escape.just
-  #       - match: '`'
-  #         scope: punctuation.definition.string.end.just
-  #         pop: 1
-  #       - include: recipe-content-string-interpolations
     - match: '"'
       scope: punctuation.definition.string.begin.just
       push:

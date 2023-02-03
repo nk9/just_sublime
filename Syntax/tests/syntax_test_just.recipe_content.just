@@ -13,11 +13,11 @@ _braces2:
 #         ^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.single.just
 #                                   ^^ punctuation.section.interpolation.end.just
 
-_braces3:
-  echo `I {{ "{{" }}LOVE}} curly braces!`
-#      ^^^ string.quoted.backtick.just
+@_braces3:
+  echo 'I {{ "{{" }}LOVE}} curly braces!'
+#      ^^^ string.quoted.single.just
 #         ^^^^^^^^^^ meta.interpolation.just
-#                   ^^^^^^^^^^^^^^^^^^^^^ string.quoted.backtick.just
+#                   ^^^^^^^^^^^^^^^^^^^^^ string.quoted.single.just
 #         ^^ punctuation.section.interpolation.begin.just
 #            ^^^^ string.quoted.double.just
 #                 ^^ punctuation.section.interpolation.end.just
