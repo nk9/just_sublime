@@ -57,13 +57,14 @@ export JUST_LOG := (log + "ing" + `grep loop /etc/networks | cut -f2`)
 # <- keyword.declaration.variable.just
 #      ^^^^^^^^ variable.other.just
 #               ^^ keyword.operator.assignment.just
-#                  ^ meta.group.just punctuation.section.group.begin.just
-#                   ^^^ meta.group.just variable.other.just
+#                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.just
+#                  ^ punctuation.section.group.begin.just
+#                   ^^^ variable.other.just
 #                       ^ keyword.operator.arithmetic.just
 #                         ^^^^^ string.quoted.double.just
 #                               ^ keyword.operator.arithmetic.just
-#                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.backtick.just
-#                                                                    ^ meta.group.just punctuation.section.group.end.just
+#                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.shell meta.interpolation.command.shell
+#                                                                    ^ punctuation.section.group.end.just
 
 # comment
 # <- comment.line.number-sign.just punctuation.definition.comment.begin.just
