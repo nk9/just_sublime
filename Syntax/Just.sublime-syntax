@@ -53,6 +53,7 @@ variables:
 
 contexts:
   main:
+    - include: includes
     - include: settings
     - include: aliases
     - include: comments
@@ -76,6 +77,15 @@ contexts:
     - meta_scope: comment.line.number-sign.just
     - include: line-end
 
+
+###[ IMPORTS ]#################################################################
+
+  includes:
+    - match: '^(!include) (.*)$'
+      scope: meta.statement.import.just
+      captures:
+        1: keyword.control.import.just
+        2: meta.generic-name.just
 
 ###[ ALIASES ]#################################################################
 
