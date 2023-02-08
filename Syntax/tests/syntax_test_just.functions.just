@@ -132,6 +132,12 @@ a_stem := file_stem(path_2)
 a_parent := parent_directory(path_2)
 #           ^^^^^^^^^^^^^^^^ meta.function-call.identifier.just support.function.builtin.just
 
+invocation_dir := invocation_directory()
+#                 ^^^^^^^^^^^^^^^^^^^^ meta.function-call.identifier.just support.function.builtin.just
+
+invocation_dir2 := invocation_directory_native()
+#                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.identifier.just support.function.builtin.just
+
 sans_ext := without_extension(path_2)
 #           ^^^^^^^^^^^^^^^^^ meta.function-call.identifier.just support.function.builtin.just
 

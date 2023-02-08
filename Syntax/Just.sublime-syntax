@@ -22,7 +22,8 @@ variables:
     (?x)  # ignore whitespace in this regex
 
       absolute_path | arch | capitalize | clean | env_var_or_default | env_var |
-      error | extension | file_name | file_stem | invocation_directory |
+      error | extension | file_name | file_stem | invocation_directory_native |
+      invocation_directory |
       join | just_executable | justfile_directory | justfile | kebabcase |
       lowercamelcase | lowercase | os_family | os | parent_directory |
       path_exists | quote | replace_regex | replace | sha256_file | sha256 |
