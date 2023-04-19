@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plist version="1.0">
+<dict>
+    <key>scope</key>
+    <string>source.just - string - comment - embedded</string>
+    <key>settings</key>
+    <dict>
+        <key>increaseIndentPattern</key>
+        <string>^[^:]+:(?!=)</string>
+        <key>decreaseIndentPattern</key>
+        <string>(?x)
+            # When an array or group is closed by itself on a line
+            # (interacts with indentParens and indentSquareBrackets)
+            (
+                ^\s*(\]|\)).*$
+            )
+        </string>
+        <key>indentParens</key>
+        <true/>
+        <key>indentSquareBrackets</key>
+        <true/>
+    </dict>
+</dict>
+</plist>
