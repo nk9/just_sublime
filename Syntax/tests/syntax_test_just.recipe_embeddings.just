@@ -9,14 +9,18 @@ python3 *ARGS:
  #      ^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.python string.quoted.double.python
  #             ^^^^^^^^^^ meta.interpolation.just
 
-bash *$ARGS:
+shell *$ARGS:
   #!/bin/sh
+ #^^^^^^^^^ source.shell.embedded.just comment.line.number-sign.shell
   set -euxo pipefail
-  echo "doing stuff"
+  echo "doing {{ARGS}} stuff"
+ #            ^^^^^^^^ meta.interpolation.just
 
 
-recipe-name $PREFIX:
+bash $PREFIX:
   #!/usr/bin/env bash
+ #^^^^^^^^^^^^^^^^^^^ source.shell.embedded.just comment.line.number-sign.shell
   set -euxo pipefail
+ #^^^^^^^^^^^^^^^^^^ source.shell.embedded.just
   for i in ${PREFIX}{0..10}; do echo scp somefile.txt ${i}; done;
 
