@@ -2,19 +2,54 @@
 <plist version="1.0">
 <dict>
     <key>scope</key>
-    <string>source.just - string - comment - embedded</string>
+    <string>source.just - comment - embedded</string>
     <key>settings</key>
     <dict>
         <key>increaseIndentPattern</key>
-        <string>^[^:]+:(?!=)</string>
+        <string><![CDATA[(?x)
+            # (if/else code borrowed from the JSON package)
+            # When an if or else block is opened, but not closed
+            (
+                ^.*(if|else).*\{
+                (
+                    # Consume strings
+                    "(?:[^"\\]|\\.)*"
+                    |
+                    # Consume all chars that don't start a string, comment or
+                    # end the block that was opened on this line
+                    [^"\#}]
+                )*
+                # Stop matching at the end of the line, or once we hit a comment
+                ($|\#)
+            )
+            |
+            # When a line contains a recipe definition, but not a variable assignment
+            (
+                ^[^:]+:(?!=)
+            )
+        ]]></string>
         <key>decreaseIndentPattern</key>
-        <string>(?x)
+        <string><![CDATA[(?x)
+            # When an if block is closed, but not opened
+            (
+                ^
+                (
+                    # Consume strings
+                    "(?:[^"\\]|\\.)*"
+                    |
+                    # Consume all chars that don't start a string, comment or
+                    # open an object on this line
+                    [^"\#{\n]
+                )*
+                \}.*$
+            )
+            |
             # When an array or group is closed by itself on a line
             # (interacts with indentParens and indentSquareBrackets)
             (
                 ^\s*(\]|\)).*$
             )
-        </string>
+        ]]></string>
         <key>indentParens</key>
         <true/>
         <key>indentSquareBrackets</key>
