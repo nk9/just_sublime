@@ -216,3 +216,11 @@ upper := uppercase("test-me")
 #                  ^^^^^^^^^ string.quoted.double.just
 #                           ^ meta.function-call.arguments.just punctuation.section.group.end.just
 
+
+#
+# Invalid cases
+#
+
+t2 := titlecased("test me thanks" + lowercase("blah"))
+#     ^^^^^^^^^^ - meta.function-call.identifier.just - support.function.builtin.just - variable.other.just
+#               ^ invalid.illegal.just 

@@ -75,3 +75,31 @@ set ignore-comments # Comment
 #   ^^^^^^^^^^^^^^^ entity.name.definition.just
 #                   ^^ comment.line.number-sign.just punctuation.definition.comment.begin.just
 #                    ^^^^^^^^ comment.line.number-sign.just
+
+
+#
+# Invalid cases
+#
+
+# Extra characters for boolean setting
+set exported
+#^^ storage.modifier.definition.just
+#   ^^^^^^^^^ - entity.name.definition.just - variable.other.just
+
+# Extra characters for string setting
+set tempdirectory := '/tmp'
+#   ^^^^^^^^^^^^^ invalid.illegal.just - entity.name.definition.just - variable.other.just
+
+set shellac := ["sh", "-c"]
+#   ^^^^^^^ invalid.illegal.just - entity.name.definition.just - variable.other.just
+
+# Wrong character case
+set tempDir
+#^^ storage.modifier.definition.just
+#   ^^^^^^^^ - entity.name.definition.just - variable.other.just
+
+set export := trued
+#             ^^^^^ - constant.language.boolean.just
+
+set dotenv-load := falsey
+#                  ^^^^^^ - constant.language.boolean.just
