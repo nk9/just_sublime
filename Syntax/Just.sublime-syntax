@@ -19,7 +19,7 @@ file_extensions:
 variables:
   valid_name: "[a-zA-Z_][a-zA-Z0-9_-]*"
   built_in_functions: |
-    (?x)  # ignore whitespace in this regex
+    (?x)(?:  # ignore whitespace in this regex
 
       absolute_path | arch | capitalize | clean | env_var_or_default | env_var |
       error | extension | file_name | file_stem | invocation_directory_native |
@@ -31,17 +31,20 @@ variables:
       trim_end_matches | trim_end_match | trim_end | trim_start_matches |
       trim_start_match | trim_start | trim | uppercase | uppercamelcase |
       uuid | without_extension
-
+    )
   boolean_settings: |
-    (?x)
+    (?x)(?:
       allow-duplicate-recipes | dotenv-load | export | fallback | ignore-comments |
       positional-arguments | windows-powershell
+    )
   string_settings: |
-    (?x)
+    (?x)(?:
       tempdir
+    )
   shell_settings: |
-    (?x)
+    (?x)(?:
       shell | windows-shell
+    )
   recipe_attributes: |
     (?x)
       linux | macos | no-cd | no-exit-message | private | unix | windows
@@ -274,6 +277,11 @@ contexts:
   ###[ VARIABLES ]###############################################################
 
   operands-variables:
+    # First check for an invalid function
+    - match: '\b({{valid_name}})\b\s*(\()'
+      captures:
+        1: source.just
+        2: invalid.illegal.just
     - match: \b(?:{{valid_name}})\b
       scope: variable.other.just
 
@@ -503,9 +511,16 @@ contexts:
     - match: '^set(?=\s+)'
       scope: storage.modifier.definition.just
       push:
+        - settings-invalid
         - settings-boolean
         - settings-shell
         - settings-string
+
+  settings-invalid:
+    - match: '\b({{valid_name}})\b\s*:='
+      captures:
+        1: invalid.illegal.just
+    - include: else-pop
 
   settings-boolean:
     - match: '\b{{boolean_settings}}\b'
@@ -532,8 +547,9 @@ contexts:
     - include: else-pop
 
   constant-boolean:
-    - match: "(true|false)"
-      scope: constant.language.boolean.just
+    - match: '\b(true|false)\b'
+      captures:
+        1: constant.language.boolean.just
       pop: 1
     - include: else-pop
 
