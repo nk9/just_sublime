@@ -6,7 +6,7 @@ python3 *ARGS:
   print("hello {{ ARGS }} world")
  #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.python.embedded.just
  #     ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.python
- #      ^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.python string.quoted.double.python
+ #      ^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.python
  #             ^^^^^^^^^^ meta.interpolation.just
 
 shell *$ARGS:
