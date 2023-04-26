@@ -45,7 +45,8 @@ https://user-images.githubusercontent.com/3646730/208213422-1ceec5de-a9a0-418f-b
     + [Syntax definitions](https://www.sublimetext.com/docs/syntax.html)
     + [Scope naming](https://www.sublimetext.com/docs/scope_naming.html)
     + [Scope naming guidelines](https://github.com/SublimeText/ScopeNamingGuidelines)
-    + [Default syntax definitions](https://github.com/sublimehq/Packages/blob/master/Python/Python.sublime-syntax) are available to view and copy
+    + [Default syntax definitions](https://github.com/sublimehq/Packages/) are available to view and copy, for example [Python](https://github.com/sublimehq/Packages/blob/master/Python/Python.sublime-syntax) and [Makefile](https://github.com/sublimehq/Packages/blob/master/Makefile/Makefile.sublime-syntax)
+- Sublime auto-indenting is covered in the [community docs](https://docs.sublimetext.io/reference/metadata.html#indentation-options) and this [extensive Forum post](https://forum.sublimetext.com/t/everything-you-n-ever-wanted-to-know-about-indentation-in-st3/26207).
 - The [ScopeHunter package](https://packagecontrol.io/packages/ScopeHunter) is on PackageControl, and it is essential. With the Instant Scoper, you will get the scope under the cursor as you move around the file.
 - This is a good blog post covering [Sublime syntax](https://haggainuchi.com/sublime.html)
 - There is a really useful [thread on GitHub with tips and advice](https://github.com/sublimehq/Packages/issues/757) for building Sublime syntax definitions
