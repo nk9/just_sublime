@@ -3,7 +3,7 @@ name: Syntax Tests
 on:
   push:
     branches:
-      - "main"
+      - "4075"
     paths:
       - '.github/workflows/syntax-tests.yml'
       - '**.sublime-syntax'
@@ -11,7 +11,7 @@ on:
       - '**.tmPreferences'
   pull_request:
     branches:
-      - "main"
+      - "4075"
     paths:
       - '.github/workflows/syntax-tests.yml'
       - '**.sublime-syntax'
@@ -24,8 +24,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - build: "latest"
-            packages: master
+          - build: 4143     # last stable build before 4148
+            packages: v4143 # last stable build before 4148
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
