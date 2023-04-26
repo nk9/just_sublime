@@ -28,7 +28,7 @@ jobs:
             packages: v4143 # last stable build before 4148
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: SublimeText/syntax-test-action@v2
         with:
           build: ${{ matrix.build }}
