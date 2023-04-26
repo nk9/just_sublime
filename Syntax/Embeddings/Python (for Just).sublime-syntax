@@ -1,9 +1,8 @@
 %YAML 1.2
 ---
-name: Python (for Just) v1
+name: Python (for Just)
 scope: source.python.embedded.just
-# Version needs to match the one that ships with Sublime. v1 as of Jan 2023.
-version: 1
+version: 2
 hidden: true
 
 extends: Packages/Python/Python.sublime-syntax
