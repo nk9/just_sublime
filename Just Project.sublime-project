@@ -1,6 +1,5 @@
 {
-	"folders":
-	[
+	"folders": [
 		{
 			"path": "."
 		}
@@ -12,6 +11,7 @@
 				"args": {},
 				"scope": "window"
 			}
-		]
+		],
+		"lsp_format_on_save": false,
 	}
 }
