@@ -17,7 +17,7 @@ file_extensions:
   - justfile
 
 variables:
-  valid_name: "[a-zA-Z_][a-zA-Z0-9_-]*"
+  valid_name: '[a-zA-Z_][a-zA-Z0-9_-]*'
   built_in_functions: |
     (?x)(?:  # ignore whitespace in this regex
 
@@ -49,13 +49,13 @@ variables:
     (?x)
       linux | macos | no-cd | no-exit-message | private | unix | windows
 
+
 ###############################################################################
 # MAIN CONTEXT
 ###############################################################################
 
 contexts:
   main:
-    # - include: ver-1-test
     - include: includes
     - include: settings
     - include: aliases
@@ -65,18 +65,13 @@ contexts:
     - include: recipe-definition
     - include: recipe-generic-line
 
-  # ver-1-test:
-  #   - meta_prepend: true
-  #   - match: "^ver1"
-  #     scope: invalid.illegal.just
-
   prototype:
     - include: comments
 
-  ###[ COMMENTS ]################################################################
+###[ COMMENTS ]################################################################
 
   comments:
-    - match: "#[^!]"
+    - match: '#[^!]'
       scope: punctuation.definition.comment.begin.just
       push: comment-line
 
@@ -85,18 +80,17 @@ contexts:
     - meta_scope: comment.line.number-sign.just
     - include: line-end
 
-  ###[ IMPORTS ]#################################################################
+
+###[ IMPORTS ]#################################################################
 
   includes:
-    # - match: "^ver1"
-    #   scope: invalid.illegal.just
-    - match: "^(!include) (.*)$"
+    - match: '^(!include) (.*)$'
       scope: meta.statement.import.just
       captures:
         1: keyword.control.import.just
         2: meta.generic-name.just
 
-  ###[ ALIASES ]#################################################################
+###[ ALIASES ]#################################################################
 
   aliases:
     - match: '^(alias)\s+({{valid_name}})\s*(:=)\s+({{valid_name}})(?=.*$)'
@@ -106,7 +100,8 @@ contexts:
         3: keyword.operator.assignment.just
         4: variable.function.just
 
-  ###[ STATEMENTS ]##############################################################
+
+###[ STATEMENTS ]##############################################################
 
   just-expressions:
     - include: groups
@@ -116,11 +111,13 @@ contexts:
     - include: strings
     - include: operands-variables
 
-  ###[ FUNCTION CALL ]###########################################################
+
+###[ FUNCTION CALL ]###########################################################
 
   function-calls:
     - match: '{{built_in_functions}}\s*(?=\()'
-      scope: meta.function-call.identifier.just
+      scope:
+        meta.function-call.identifier.just
         support.function.builtin.just
       push: function-call-arguments
 
@@ -138,7 +135,8 @@ contexts:
       captures:
         1: variable.parameter.just
 
-  ###[ GROUPS ]##################################################################
+
+###[ GROUPS ]##################################################################
 
   groups:
     - match: \(
@@ -155,7 +153,8 @@ contexts:
     - include: group-end
     - include: just-expressions
 
-  ###[ IF STATEMENT ]############################################################
+
+###[ IF STATEMENT ]############################################################
 
   if-statements:
     - match: 'if\b'
@@ -167,29 +166,30 @@ contexts:
 
   if-statement-condition-body:
     - meta_scope: meta.statement.conditional.if.just
-    - match: "{"
+    - match: '{'
       scope: punctuation.section.block.begin.just
       push: if-else-block-body
-    - match: "!=|==|=~"
+    - match: '!=|==|=~'
       scope: keyword.operator.comparison.just
     - include: just-expressions
     - include: else-pop
 
   else-statement-block:
     - meta_scope: meta.statement.conditional.else.just
-    - match: "{"
+    - match: '{'
       scope: punctuation.section.block.begin.just
       push: if-else-block-body
     - include: else-pop
 
   if-else-block-body:
     - meta_scope: meta.block.just
-    - match: "}"
+    - match: '}'
       scope: punctuation.section.block.end.just
       pop: 2
     - include: just-expressions
 
-  ###[ OPERATORS ]###############################################################
+
+###[ OPERATORS ]###############################################################
 
   operators:
     - include: punctuation-separators
@@ -197,10 +197,11 @@ contexts:
       scope: keyword.operator.arithmetic.just
 
   punctuation-separators:
-    - match: ","
+    - match: ','
       scope: punctuation.separator.sequence.just
 
-  ###[ CHARACTERS ]##############################################################
+
+###[ CHARACTERS ]##############################################################
 
   strings:
     - include: single-quote-block-strings
@@ -210,23 +211,25 @@ contexts:
     - include: backtick-quote-block-strings
     - include: backtick-quote-strings
 
+
   backtick-quote-block-strings:
-    - match: "```"
+    - match: '```'
       scope: punctuation.section.interpolation.begin.just
       push:
         - meta_scope: meta.string.shell meta.interpolation.command.shell
         - meta_include_prototype: false
-        - match: "```"
+        - match: '```'
           scope: punctuation.section.interpolation.end.just
           pop: 1
 
+
   backtick-quote-strings:
-    - match: "`"
+    - match: '`'
       scope: punctuation.section.interpolation.begin.just
       push:
         - meta_scope: meta.string.shell meta.interpolation.command.shell
         - meta_include_prototype: false
-        - match: "`"
+        - match: '`'
           scope: punctuation.section.interpolation.end.just
           pop: 1
 
@@ -274,7 +277,8 @@ contexts:
           scope: punctuation.definition.string.end.just
           pop: 1
 
-  ###[ VARIABLES ]###############################################################
+
+###[ VARIABLES ]###############################################################
 
   operands-variables:
     # First check for an invalid function
@@ -285,7 +289,8 @@ contexts:
     - match: \b(?:{{valid_name}})\b
       scope: variable.other.just
 
-  ###[ VARIABLE ASSIGNMENT ]#####################################################
+
+###[ VARIABLE ASSIGNMENT ]#####################################################
 
   assignment:
     - match: '(export)?\s*({{valid_name}})\s*(?=:=)'
@@ -304,22 +309,23 @@ contexts:
     - include: eol-pop
     - include: just-expressions
 
-  ###[ RECIPE DEFINITION ]#######################################################
-  # Recipe definition lines, including attributes, arguments and dependencies
+
+###[ RECIPE DEFINITION ]#######################################################
+# Recipe definition lines, including attributes, arguments and dependencies
 
   recipe-attribute:
     - match: '^\[\s*({{recipe_attributes}})\s*\]\s*$' # Only one attribute allowed per line
       scope: meta.annotation.just variable.annotation.just
 
   recipe-definition:
-    - match: "(?=^@?{{valid_name}}(?![^:]*:=))" # Matches '^recipeName' but not '^varName :='
+    - match: '(?=^@?{{valid_name}}(?![^:]*:=))' # Matches '^recipeName' but not '^varName :='
       push:
         - recipe-body
         - recipe-name
         - recipe-modifier
 
   recipe-modifier:
-    - match: "^@"
+    - match: '^@'
       scope: meta.function.just storage.modifier.quiet.just
     - include: else-pop
 
@@ -334,7 +340,7 @@ contexts:
     - include: else-pop
 
   recipe-assignment:
-    - match: ":"
+    - match: ':'
       scope: keyword.operator.assignment.just
     - include: eol-pop
     - include: else-pop
@@ -363,7 +369,7 @@ contexts:
     - include: else-pop
 
   recipe-parameter-assignment:
-    - match: "="
+    - match: '='
       scope: keyword.operator.assignment.just
       push:
         - include: just-expressions
@@ -381,7 +387,7 @@ contexts:
       push: recipe-dependency-with-args
     - match: '\b{{valid_name}}\b'
       scope: variable.function.just
-    - match: "&&"
+    - match: '&&'
       scope: keyword.operator.logical.just
     - include: eol-pop
     - include: else-pop
@@ -420,7 +426,7 @@ contexts:
       comment: Content using the default shell
       pop: 1
 
-  ###[ RECIPE CONTENTS ]#########################################################
+###[ RECIPE CONTENTS ]#########################################################
 
   recipe-generic-line:
     - match: ^(?=\s+\S)
@@ -504,8 +510,9 @@ contexts:
     - meta_scope: meta.interpolation.just
     - include: recipe-content-interpolation-body
 
-  ###[ Set Expressions ]#########################################################
-  # Ex: "set shell := ['zsh', '-cu']", "set dotenv-load", "set export := false"
+
+###[ Set Expressions ]#########################################################
+# Ex: "set shell := ['zsh', '-cu']", "set dotenv-load", "set export := false"
 
   settings:
     - match: '^set(?=\s+)'
@@ -547,7 +554,7 @@ contexts:
     - include: else-pop
 
   constant-boolean:
-    - match: '\b(true|false)\b'
+    - match: \b(true|false)\b
       captures:
         1: constant.language.boolean.just
       pop: 1
@@ -556,14 +563,14 @@ contexts:
   string-array:
     - match: '\['
       scope: punctuation.section.brackets.start.just
-    - match: ","
+    - match: ','
       scope: punctuation.separator.parameters.just
     - match: '\]'
       scope: punctuation.section.brackets.end.just
       pop: 1
     - include: strings
 
-  # ###[ General Types ]##########################################################
+# ###[ General Types ]##########################################################
 
   variable-name:
     - match: '\b{{valid_name}}\b'
@@ -575,14 +582,14 @@ contexts:
       scope: keyword.operator.assignment.just
     - include: else-pop
 
-  ###[ Common Prototypes ]#######################################################
+###[ Common Prototypes ]#######################################################
 
   line-end:
     - match: $
       pop: 1
 
-  # Remove the current stack item when we're about to reach a new character
-  # Learn more: https://github.com/sublimehq/Packages/issues/757#issuecomment-287193733
+# Remove the current stack item when we're about to reach a new character
+# Learn more: https://github.com/sublimehq/Packages/issues/757#issuecomment-287193733
   else-pop:
     - match: (?=\S)
       pop: 1
