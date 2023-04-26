@@ -84,7 +84,7 @@ contexts:
 ###[ IMPORTS ]#################################################################
 
   includes:
-    - match: '^(!include) (.*)$'
+    - match: ^(!include) (.*)$
       scope: meta.statement.import.just
       captures:
         1: keyword.control.import.just
@@ -93,7 +93,7 @@ contexts:
 ###[ ALIASES ]#################################################################
 
   aliases:
-    - match: '^(alias)\s+({{valid_name}})\s*(:=)\s+({{valid_name}})(?=.*$)'
+    - match: ^(alias)\s+({{valid_name}})\s*(:=)\s+({{valid_name}})(?=.*$)
       captures:
         1: support.function.export.just
         2: variable.other.just
@@ -157,16 +157,16 @@ contexts:
 ###[ IF STATEMENT ]############################################################
 
   if-statements:
-    - match: 'if\b'
+    - match: if\b
       scope: keyword.control.conditional.if.just
       push: if-statement-condition-body
-    - match: 'else\b'
+    - match: else\b
       scope: keyword.control.conditional.else.just
       push: else-statement-block
 
   if-statement-condition-body:
     - meta_scope: meta.statement.conditional.if.just
-    - match: '{'
+    - match: \{
       scope: punctuation.section.block.begin.just
       push: if-else-block-body
     - match: '!=|==|=~'
@@ -176,14 +176,14 @@ contexts:
 
   else-statement-block:
     - meta_scope: meta.statement.conditional.else.just
-    - match: '{'
+    - match: \{
       scope: punctuation.section.block.begin.just
       push: if-else-block-body
     - include: else-pop
 
   if-else-block-body:
     - meta_scope: meta.block.just
-    - match: '}'
+    - match: \}
       scope: punctuation.section.block.end.just
       pop: 2
     - include: just-expressions
@@ -193,7 +193,7 @@ contexts:
 
   operators:
     - include: punctuation-separators
-    - match: '(\+|\/)'
+    - match: (\+|\/)
       scope: keyword.operator.arithmetic.just
 
   punctuation-separators:
@@ -282,7 +282,7 @@ contexts:
 
   operands-variables:
     # First check for an invalid function
-    - match: '\b({{valid_name}})\b\s*(\()'
+    - match: \b({{valid_name}})\b\s*(\()
       captures:
         1: source.just
         2: invalid.illegal.just
@@ -293,7 +293,7 @@ contexts:
 ###[ VARIABLE ASSIGNMENT ]#####################################################
 
   assignment:
-    - match: '(export)?\s*({{valid_name}})\s*(?=:=)'
+    - match: (export)?\s*({{valid_name}})\s*(?=:=)
       captures:
         1: keyword.declaration.variable.just
         2: variable.other.just
@@ -314,23 +314,23 @@ contexts:
 # Recipe definition lines, including attributes, arguments and dependencies
 
   recipe-attribute:
-    - match: '^\[\s*({{recipe_attributes}})\s*\]\s*$' # Only one attribute allowed per line
+    - match: ^\[\s*({{recipe_attributes}})\s*\]\s*$ # Only one attribute allowed per line
       scope: meta.annotation.just variable.annotation.just
 
   recipe-definition:
-    - match: '(?=^@?{{valid_name}}(?![^:]*:=))' # Matches '^recipeName' but not '^varName :='
+    - match: (?=^@?{{valid_name}}(?![^:]*:=)) # Matches '^recipeName' but not '^varName :='
       push:
         - recipe-body
         - recipe-name
         - recipe-modifier
 
   recipe-modifier:
-    - match: '^@'
+    - match: ^@
       scope: meta.function.just storage.modifier.quiet.just
     - include: else-pop
 
   recipe-name:
-    - match: '\b{{valid_name}}'
+    - match: \b{{valid_name}}
       scope: meta.function.just entity.name.function.just
       pop: 1 # Only match the first instance
       push:
@@ -347,7 +347,7 @@ contexts:
 
   recipe-parameter:
     - meta_content_scope: meta.function.parameters.just
-    - match: '(?=[\+\*$a-zA-Z_])'
+    - match: (?=[\+\*$a-zA-Z_])
       push:
         - recipe-parameter-assignment
         - recipe-parameter-name
@@ -362,30 +362,30 @@ contexts:
     - include: else-pop
 
   recipe-export-operator:
-    - match: '\$(?=\s*{{valid_name}})'
+    - match: \$(?=\s*{{valid_name}})
       scope: keyword.operator.exported.just
     - match: '[\+\*\$]'
       scope: invalid.illegal.just
     - include: else-pop
 
   recipe-parameter-assignment:
-    - match: '='
+    - match: =
       scope: keyword.operator.assignment.just
       push:
         - include: just-expressions
-        - match: '(\s+|(?=:))'
+        - match: (\s+|(?=:))
           pop: 1
     - include: else-pop
 
   recipe-parameter-name:
-    - match: '\b{{valid_name}}\b'
+    - match: \b{{valid_name}}\b
       scope: variable.parameter.just
     - include: else-pop
 
   recipe-dependencies:
     - match: (?=\()
       push: recipe-dependency-with-args
-    - match: '\b{{valid_name}}\b'
+    - match: \b{{valid_name}}\b
       scope: variable.function.just
     - match: '&&'
       scope: keyword.operator.logical.just
@@ -399,7 +399,7 @@ contexts:
 
   recipe-dependency-with-args-body:
     - meta_scope: meta.group.just
-    - match: '\b{{valid_name}}'
+    - match: \b{{valid_name}}
       scope: variable.function.just
       push:
         - include: just-expressions
@@ -437,10 +437,10 @@ contexts:
   recipe-generic-content:
     - include: recipe-content-interpolations
     - include: recipe-content-strings
-    - match: '(\\)$\n?'
+    - match: (\\)$\n?
       captures:
         1: punctuation.separator.continuation.line.just
-    - match: '$\n'
+    - match: $\n
       comment: |
         No trailing '?', so this will NOT match lines matched by the previous rule.
         There is no pop there, so this context will remain on the stack WITHOUT the
@@ -449,7 +449,7 @@ contexts:
       pop: 1
 
   recipe-content-modifiers:
-    - match: '^\s+((@)|(-)(@)|(-)|(@)(-))(?!-)'
+    - match: ^\s+((@)|(-)(@)|(-)|(@)(-))(?!-)
       captures:
         2: storage.modifier.quiet.just
         3: storage.modifier.ignore-error.just
@@ -460,15 +460,15 @@ contexts:
     - include: else-pop
 
   recipe-content-interpolations:
-    - match: '\{\{\{\{'
+    - match: \{\{\{\{
       comment: Escaped double brace. Do nothing
-    - match: '\{\{(?!\{)'
+    - match: \{\{(?!\{)
       scope: punctuation.section.interpolation.begin.just
       push: recipe-content-interpolation-body
 
   recipe-content-interpolation-body:
     - meta_scope: meta.interpolation.just
-    - match: '\}\}'
+    - match: \}\}
       scope: punctuation.section.interpolation.end.just
       pop: 1
     - include: just-expressions
@@ -499,9 +499,9 @@ contexts:
         - include: recipe-content-string-interpolations
 
   recipe-content-string-interpolations:
-    - match: '\{\{\{\{'
+    - match: \{\{\{\{
       comment: Escaped double brace. Do nothing
-    - match: '\{\{(?!\{)'
+    - match: \{\{(?!\{)
       scope: punctuation.section.interpolation.begin.just
       push: recipe-content-string-interpolation-body
 
@@ -515,7 +515,7 @@ contexts:
 # Ex: "set shell := ['zsh', '-cu']", "set dotenv-load", "set export := false"
 
   settings:
-    - match: '^set(?=\s+)'
+    - match: ^set(?=\s+)
       scope: storage.modifier.definition.just
       push:
         - settings-invalid
@@ -524,13 +524,13 @@ contexts:
         - settings-string
 
   settings-invalid:
-    - match: '\b({{valid_name}})\b\s*:='
+    - match: \b({{valid_name}})\b\s*:=
       captures:
         1: invalid.illegal.just
     - include: else-pop
 
   settings-boolean:
-    - match: '\b{{boolean_settings}}\b'
+    - match: \b{{boolean_settings}}\b
       scope: entity.name.definition.just
       push:
         - constant-boolean
@@ -538,7 +538,7 @@ contexts:
     - include: else-pop
 
   settings-string:
-    - match: '\b{{string_settings}}\b'
+    - match: \b{{string_settings}}\b
       scope: entity.name.definition.just
       push:
         - assignment-operator
@@ -546,7 +546,7 @@ contexts:
     - include: else-pop
 
   settings-shell:
-    - match: '\b{{shell_settings}}\b'
+    - match: \b{{shell_settings}}\b
       scope: entity.name.definition.just
       push:
         - string-array
@@ -561,11 +561,11 @@ contexts:
     - include: else-pop
 
   string-array:
-    - match: '\['
+    - match: \[
       scope: punctuation.section.brackets.start.just
     - match: ','
       scope: punctuation.separator.parameters.just
-    - match: '\]'
+    - match: \]
       scope: punctuation.section.brackets.end.just
       pop: 1
     - include: strings
@@ -573,7 +573,7 @@ contexts:
 # ###[ General Types ]##########################################################
 
   variable-name:
-    - match: '\b{{valid_name}}\b'
+    - match: \b{{valid_name}}\b
       scope: variable.other.just
     - include: else-pop
 
@@ -595,5 +595,5 @@ contexts:
       pop: 1
 
   eol-pop:
-    - match: '$\n?'
+    - match: $\n?
       pop: 1
