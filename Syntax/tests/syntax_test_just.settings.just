@@ -51,6 +51,7 @@ set shell := ["sh", "-c"]
 #   ^^^^^ entity.name.definition.just
 #         ^^ keyword.operator.assignment.just
 #            ^ punctuation.section.brackets.start.just
+#            ^^^^^^^^^^^^ meta.sequence.list.just
 #             ^^^^ string.quoted.double.just
 #                 ^ punctuation.separator.parameters.just
 #                   ^^^^ string.quoted.double.just
@@ -103,3 +104,30 @@ set export := trued
 
 set dotenv-load := falsey
 #                  ^^^^^^ - constant.language.boolean.just
+
+
+
+# [#19] First variable assignment following a set marked as invalid
+set positional-arguments
+export ONE := "1"
+#<- keyword.declaration.variable.just
+#^^^^^ keyword.declaration.variable.just
+#      ^^^ variable.other.just
+#          ^^ keyword.operator.assignment.just
+#             ^^^ string.quoted.double.just 
+
+set export := true
+export TRY := "1"
+#<- keyword.declaration.variable.just
+#^^^^^ keyword.declaration.variable.just
+#      ^^^ variable.other.just
+#          ^^ keyword.operator.assignment.just
+#             ^^^ string.quoted.double.just 
+
+set shell := ["sh", "-c"]
+export TWO := "2"
+#<- keyword.declaration.variable.just
+#^^^^^ keyword.declaration.variable.just
+#      ^^^ variable.other.just
+#          ^^ keyword.operator.assignment.just
+#             ^^^ string.quoted.double.just 

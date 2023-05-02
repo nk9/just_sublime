@@ -507,8 +507,8 @@ contexts:
       scope: storage.modifier.definition.just
       push:
         - settings-invalid
-        - settings-boolean
         - settings-shell
+        - settings-boolean
         - settings-string
 
   settings-invalid:
@@ -517,10 +517,19 @@ contexts:
         1: invalid.illegal.just
     - include: else-pop
 
+  settings-shell:
+    - match: \b{{shell_settings}}\b
+      scope: entity.name.definition.just
+      pop: 1 # Clear the settings-invalid scope from the stack
+      set:
+        - string-array
+        - assignment-operator
+    - include: else-pop
+
   settings-boolean:
     - match: \b{{boolean_settings}}\b
       scope: entity.name.definition.just
-      push:
+      set:
         - constant-boolean
         - assignment-operator
     - include: else-pop
@@ -533,14 +542,6 @@ contexts:
     - include: strings
     - include: else-pop
 
-  settings-shell:
-    - match: \b{{shell_settings}}\b
-      scope: entity.name.definition.just
-      push:
-        - string-array
-        - assignment-operator
-    - include: else-pop
-
   constant-boolean:
     - match: \b(true|false)\b
       captures:
@@ -549,6 +550,7 @@ contexts:
     - include: else-pop
 
   string-array:
+    - meta_scope: meta.sequence.list.just
     - match: \[
       scope: punctuation.section.brackets.start.just
     - match: ','
@@ -557,6 +559,7 @@ contexts:
       scope: punctuation.section.brackets.end.just
       pop: 1
     - include: strings
+    - include: else-pop
 
 # ###[ General Types ]##########################################################
 
