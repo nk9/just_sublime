@@ -520,7 +520,6 @@ contexts:
   settings-shell:
     - match: \b{{shell_settings}}\b
       scope: entity.name.definition.just
-      pop: 1 # Clear the settings-invalid scope from the stack
       set:
         - string-array
         - assignment-operator
@@ -559,7 +558,6 @@ contexts:
       scope: punctuation.section.brackets.end.just
       pop: 1
     - include: strings
-    - include: else-pop
 
 # ###[ General Types ]##########################################################
 
