@@ -508,8 +508,8 @@ contexts:
       push: settings-name
 
   settings-name:
-    - include: settings-shell-name
     - include: settings-boolean-name
+    - include: settings-shell-name
     - include: settings-string-name
     - include: settings-invalid-name
     - include: else-pop
