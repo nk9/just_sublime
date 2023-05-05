@@ -1,0 +1,11 @@
+<snippet>
+    <content><![CDATA[
+if ${1:a} == ${2:b} {
+    ${3}
+} else {
+    ${4}
+}
+]]></content>
+    <tabTrigger>if</tabTrigger>
+    <scope>source.just</scope>
+</snippet>
