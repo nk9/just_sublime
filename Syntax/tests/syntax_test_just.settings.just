@@ -114,7 +114,7 @@ export ONE := "1"
 #^^^^^ keyword.declaration.variable.just
 #      ^^^ variable.other.just
 #          ^^ keyword.operator.assignment.just
-#             ^^^ string.quoted.double.just 
+#             ^^^ string.quoted.double.just
 
 set export := true
 export TRY := "1"
@@ -122,7 +122,7 @@ export TRY := "1"
 #^^^^^ keyword.declaration.variable.just
 #      ^^^ variable.other.just
 #          ^^ keyword.operator.assignment.just
-#             ^^^ string.quoted.double.just 
+#             ^^^ string.quoted.double.just
 
 set shell := ["sh", "-c"]
 export TWO := "2"
@@ -130,4 +130,13 @@ export TWO := "2"
 #^^^^^ keyword.declaration.variable.just
 #      ^^^ variable.other.just
 #          ^^ keyword.operator.assignment.just
-#             ^^^ string.quoted.double.just 
+#             ^^^ string.quoted.double.just
+
+set tempdir := ""
+export := true
+# <- - entity
+
+set tempdir := ""
+export := true
+shell := ["sh", "-c"]
+# <- - entity
