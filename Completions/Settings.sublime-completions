@@ -1,0 +1,50 @@
+{
+    "scope": "meta.setting-name.just - string - comment",
+    "completions": [
+        {
+            "trigger": "allow-duplicate-recipes",
+            "details": "Later recipes override earlier",
+            "kind": ["keyword", "k", "setting"]
+        },
+        {
+            "trigger": "dotenv-load",
+            "details": "Load .env file, if it exists",
+            "kind": ["keyword", "k", "setting"]
+        },
+        {
+            "trigger": "export",
+            "details": "Export all variables",
+            "kind": ["keyword", "k", "setting"]
+        },
+        {
+            "trigger": "fallback",
+            "details": "Search up directory tree",
+            "kind": ["keyword", "k", "setting"]
+        },
+        {
+            "trigger": "ignore-comments",
+            "details": "Ignore # lines in recipes",
+            "kind": ["keyword", "k", "setting"]
+        },
+        {
+            "trigger": "positional-arguments",
+            "details": "Pass positional arguments",
+            "kind": ["keyword", "k", "setting"]
+        },
+        {
+            "trigger": "shell",
+            "details": "Command for recipes/backticks",
+            "kind": ["keyword", "k", "setting"]
+        },
+        {
+            "trigger": "tempdir",
+            "details": "Path to create temp directories",
+            "kind": ["keyword", "k", "setting"]
+        },
+        {
+            "trigger": "windows-shell",
+            "details": "Command for recipes/backticks",
+            "kind": ["keyword", "k", "setting"]
+        },
+    ]
+}
