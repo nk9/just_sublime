@@ -134,9 +134,9 @@ export TWO := "2"
 
 set tempdir := ""
 export := true
-# <- - entity
+# <- variable.other.just - entity
 
 set tempdir := ""
 export := true
 shell := ["sh", "-c"]
-# <- - entity
+# <- variable.other.just - entity
