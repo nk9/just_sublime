@@ -503,60 +503,71 @@ contexts:
 # Ex: "set shell := ['zsh', '-cu']", "set dotenv-load", "set export := false"
 
   settings:
-    - match: ^set(?=\s+)
+    - match: ^set(?=\s)
       scope: storage.modifier.definition.just
-      push:
-        - settings-invalid
-        - settings-boolean
-        - settings-shell
-        - settings-string
+      push: settings-name
 
-  settings-invalid:
-    - match: \b({{valid_name}})\b\s*:=
-      captures:
-        1: invalid.illegal.just
+  settings-name:
+    - include: settings-boolean-name
+    - include: settings-shell-name
+    - include: settings-string-name
+    - include: settings-invalid-name
     - include: else-pop
 
-  settings-boolean:
-    - match: \b{{boolean_settings}}\b
+  settings-boolean-name:
+    - match: '{{boolean_settings}}\b'
       scope: entity.name.definition.just
-      push:
-        - constant-boolean
+      set:
+        - settings-boolean-value
         - assignment-operator
-    - include: else-pop
 
-  settings-string:
-    - match: \b{{string_settings}}\b
-      scope: entity.name.definition.just
-      push:
-        - assignment-operator
-    - include: strings
-    - include: else-pop
-
-  settings-shell:
-    - match: \b{{shell_settings}}\b
-      scope: entity.name.definition.just
-      push:
-        - string-array
-        - assignment-operator
-    - include: else-pop
-
-  constant-boolean:
-    - match: \b(true|false)\b
-      captures:
-        1: constant.language.boolean.just
+  settings-boolean-value:
+    - match: (?:true|false)\b
+      scope: constant.language.boolean.just
       pop: 1
     - include: else-pop
+    - include: eol-pop
 
-  string-array:
+  settings-invalid-name:
+    - match: ({{valid_name}})\b\s*:=
+      captures:
+        1: invalid.illegal.just
+      push: eol-pop
+
+  settings-shell-name:
+    - match: '{{shell_settings}}\b'
+      scope: entity.name.definition.just
+      set:
+        - settings-shell-value
+        - assignment-operator
+
+  settings-shell-value:
     - match: \[
       scope: punctuation.section.brackets.start.just
-    - match: ','
-      scope: punctuation.separator.parameters.just
+      set: string-array-body
+    - include: else-pop
+    - include: eol-pop
+
+  string-array-body:
+    - meta_scope: meta.sequence.list.just
     - match: \]
       scope: punctuation.section.brackets.end.just
       pop: 1
+    - match: ','
+      scope: punctuation.separator.parameters.just
     - include: strings
+    - include: eol-pop #??
+
+  settings-string-name:
+    - match: '{{string_settings}}\b'
+      scope: entity.name.definition.just
+      set:
+        - settings-string-value
+        - assignment-operator
+
+  settings-string-value:
+    - include: strings
+    - include: eol-pop
 
 # ###[ General Types ]##########################################################
 
