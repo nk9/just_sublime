@@ -128,7 +128,7 @@ contexts:
     - include: aliases
     - include: comments
     - include: assignment
-    - include: recipe-attribute
+    - include: recipe-attributes
     - include: recipe-definition
     - include: recipe-generic-line
 
@@ -380,9 +380,32 @@ contexts:
 ###[ RECIPE DEFINITION ]#######################################################
 # Recipe definition lines, including attributes, arguments and dependencies
 
-  recipe-attribute:
-    - match: ^\[\s*({{recipe_attributes}})\s*\]\s*$ # Only one attribute allowed per line
+  recipe-attributes:
+    - match: ^\[
       scope: meta.annotation.just variable.annotation.just
+      push:
+        - recipe-attributes-body
+        - expect-recipe-attribute-name
+    - include: eol-pop
+
+  recipe-attributes-body:
+    - meta_scope: meta.sequence.list.just meta.annotation.just
+    - match: \]
+      scope: variable.annotation.just
+      pop: 1
+    - match: ','
+      scope: punctuation.separator.parameters.just
+      push: expect-recipe-attribute-name
+    - include: eol-pop
+
+  expect-recipe-attribute-name:
+    - match: ({{recipe_attributes}})
+      scope: variable.annotation.just
+      pop: 1
+    - match: \]
+      scope: invalid.illegal.just
+      pop: 2
+    - include: else-pop
 
   recipe-definition:
     - match: (?=^@?{{valid_name}}(?![^:]*:=)) # Matches '^recipeName' but not '^varName :='
