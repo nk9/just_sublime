@@ -19,15 +19,94 @@ file_extensions:
 variables:
   valid_name: '[a-zA-Z_][a-zA-Z0-9_-]*'
   built_in_functions: |-
-    (?x: absolute_path | arch | capitalize | clean | env_var_or_default | env_var
-    | error | extension | file_name | file_stem | invocation_directory_native
-    | invocation_directory | join | just_executable | justfile_directory | justfile
-    | kebabcase | lowercamelcase | lowercase | os_family | os | parent_directory
-    | path_exists | quote | replace_regex | replace | sha256_file | sha256
-    | shoutykebabcase | shoutysnakecase | snakecase | titlecase
-    | trim_end_matches | trim_end_match | trim_end | trim_start_matches
-    | trim_start_match | trim_start | trim | uppercase | uppercamelcase
-    | uuid | without_extension )
+    (?x:
+      absolute_path
+    | append
+    | arch
+    | blake3
+    | blake3_file
+    | cache_dir
+    | cache_directory
+    | canonicalize
+    | capitalize
+    | choose
+    | clean
+    | config_dir
+    | config_directory
+    | config_local_dir
+    | config_local_directory
+    | data_dir
+    | data_directory
+    | data_local_dir
+    | data_local_directory
+    | datetime
+    | datetime_utc
+    | encode_uri_component
+    | env
+    | env_var
+    | env_var_or_default
+    | error
+    | executable_dir
+    | executable_directory
+    | extension
+    | file_name
+    | file_stem
+    | home_dir
+    | home_directory
+    | invocation_dir
+    | invocation_dir_native
+    | invocation_directory
+    | invocation_directory_native
+    | is_dependency
+    | join
+    | just_executable
+    | just_pid
+    | justfile
+    | justfile_dir
+    | justfile_directory
+    | kebabcase
+    | lowercamelcase
+    | lowercase
+    | module_dir
+    | module_directory
+    | module_file
+    | num_cpus
+    | os
+    | os_family
+    | parent_dir
+    | parent_directory
+    | path_exists
+    | prepend
+    | quote
+    | read
+    | replace
+    | replace_regex
+    | require
+    | semver_matches
+    | sha256
+    | sha256_file
+    | shell
+    | shoutykebabcase
+    | shoutysnakecase
+    | snakecase
+    | source_dir
+    | source_directory
+    | source_file
+    | style
+    | titlecase
+    | trim
+    | trim_end
+    | trim_end_match
+    | trim_end_matches
+    | trim_start
+    | trim_start_match
+    | trim_start_matches
+    | uppercamelcase
+    | uppercase
+    | uuid
+    | which
+    | without_extension
+    )
   boolean_settings: |-
     (?x: allow-duplicate-recipes | dotenv-load | export | fallback | ignore-comments
     | positional-arguments | windows-powershell )
