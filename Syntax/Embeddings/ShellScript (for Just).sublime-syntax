@@ -16,7 +16,7 @@ contexts:
     - meta_prepend: true
     # command beginning with Just interpolation
     - match: ^\s+(?=\{\{(?!\{))
-      push: [cmd-args, cmd-basic-name]
+      push: cmd-basic
 
   string-prototype:
     # Note: not yet supported by ST 4143/4146 (it's in preparation)
