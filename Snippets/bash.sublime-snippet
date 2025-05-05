@@ -6,5 +6,6 @@ ${1:recipe-name} *\$ARGS:
   echo 'Hello, world!' \$ARGS
 ]]></content>
     <tabTrigger>justbash</tabTrigger>
-    <scope>source.just</scope>
+    <scope>source.just - meta.setting-name.just</scope>
+    <description>A basic bash recipe</description>
 </snippet>

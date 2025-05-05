@@ -205,17 +205,40 @@ attr-test:
 linux-attr:
 
 [  macos  ]
-#^^^^^^^^^^ meta.annotation.just variable.annotation.just
+#^^^^^^^^^^ meta.sequence.list.just meta.annotation.just
 macos-attr:
 
 [unix   ]
-#^^^^^^^^ meta.annotation.just variable.annotation.just
+#^^^^^^^^ meta.sequence.list.just meta.annotation.just
 unix-attr:
 
 [  windows]
-#^^^^^^^^^^ meta.annotation.just variable.annotation.just
+#^^^^^^^^^ meta.sequence.list.just meta.annotation.just
 windows-attr:
 
+[ windows, macos, linux]
+#^^^^^^^^^^^^^^^^^^^^^^^ meta.sequence.list.just meta.annotation.just
+# ^^^^^^^ variable.annotation.just
+#        ^ punctuation.separator.parameters.just
+#          ^^^^^ variable.annotation.just
+#               ^ punctuation.separator.parameters.just
+#                 ^^^^^ variable.annotation.just
+attr-multi-valid:
+
+[windows linux]
+#^^^^^^^^^^^^^^ meta.sequence.list.just meta.annotation.just
+#^^^^^^^ variable.annotation.just
+#        ^^^^^ - variable.annotation.just
+attr-multi-invalid-1:
+
+[macos, ]
+#       ^ invalid.illegal.just
+attr-multi-invalid-2:
+
+[nonexistant-attribute]
+#<- meta.sequence.list.just meta.annotation.just meta.annotation.just variable.annotation.just
+#^^^^^^^^^^^^^^^^^^^^^ meta.sequence.list.just meta.annotation.just - variable.annotation.just
+attr-invalid:
 
 test-image $PRODUCT $VERSION +IMAGES:
 #                            ^ meta.function.parameters.just keyword.operator.variadic.just
