@@ -108,12 +108,32 @@ variables:
     | without_extension
     )
   boolean_settings: |-
-    (?x: allow-duplicate-recipes | dotenv-load | export | fallback | ignore-comments
-    | positional-arguments | windows-powershell )
+    (?x:
+      allow-duplicate-recipes
+    | allow-duplicate-variables
+    | dotenv-load
+    | export
+    | fallback
+    | ignore-comments
+    | positional-arguments
+    | quiet
+    | unstable
+    )
   string_settings: |-
-    (?x: tempdir )
+    (?x:
+      dotenv-filename
+    | dotenv-path
+    | tempdir
+    | working-directory
+    )
   shell_settings: |-
-    (?x: shell | windows-shell )
+    (?x:
+      script-interpreter
+    | shell
+    | windows-shell
+    )
+  deprecated_settings: |-
+    (?x: windows-powershell )
   recipe_attributes: |-
     (?x: linux | macos | no-cd | no-exit-message | private | unix | windows )
 
@@ -614,6 +634,7 @@ contexts:
     - include: settings-boolean-name
     - include: settings-shell-name
     - include: settings-string-name
+    - include: settings-deprecated-name
     - include: settings-invalid-name
     - include: else-pop
 
@@ -630,6 +651,12 @@ contexts:
       pop: 1
     - include: else-pop
     - include: eol-pop
+
+  settings-deprecated-name:
+    - match: ({{deprecated_settings}})\b
+      captures:
+        1: invalid.deprecated.just
+      push: eol-pop
 
   settings-invalid-name:
     - match: ({{valid_name}})\b\s*:=
