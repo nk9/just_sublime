@@ -30,7 +30,7 @@
         },
         {
             "trigger": "dotenv-required",
-            "details": "Error if a .env file isn't found",
+            "details": "Error if a .env file isn’t found",
             "kind": ["keyword", "k", "setting"]
         },
         {
