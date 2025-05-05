@@ -59,3 +59,38 @@ confirm-group:
 
 [confirm("You sure?"), no-cd]
 confirm-with-arg:
+
+[script("bash", '-eu')]
+#^^^^^^ meta.sequence.list.just meta.annotation.just variable.annotation.just
+#      ^ meta.sequence.list.just meta.annotation.just punctuation.definition.annotation.begin.just
+#      ^^^^^^^^^^^^^^^ meta.sequence.list.just
+#       ^^^^^^ string.quoted.double.just
+#               ^^^^^ string.quoted.single.just
+recipe:
+  @echo "do it"
+
+[working-directory: '']
+#                 ^ meta.sequence.list.just meta.annotation.just keyword.operator.assignment.just
+#                   ^ string.quoted.single.just punctuation.definition.string.begin.just
+#                    ^ string.quoted.single.just punctuation.definition.string.end.just
+working-dir:
+
+[working-directory: `/tmp`]
+#                   ^ invalid.illegal.just
+tmp-dir-invalid:
+  @echo "nope"
+
+[working-directory: '/tmp', script("bash")]
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.sequence.list.just meta.annotation.just
+#                 ^ keyword.operator.assignment.just
+#                   ^ string.quoted.single.just punctuation.definition.string.begin.just
+#                    ^^^^^ string.quoted.single.just
+#                         ^ punctuation.separator.parameters.just
+#                           ^^^^^^ variable.annotation.just
+#                                 ^ punctuation.definition.annotation.begin.just
+#                                  ^^^^^^ string.quoted.double.just
+#                                  ^ punctuation.definition.string.begin.just
+#                                        ^ punctuation.definition.annotation.end.just
+#                                         ^ variable.annotation.just
+doit:
+  @echo "done"
