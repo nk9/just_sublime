@@ -40,7 +40,7 @@ set tempdir := '/tmp/just'
 #              ^^^^^^^^^^^ string.quoted.single.just
 
 set windows-powershell
-#   ^^^^^^^^^^^^^^^^^^ entity.name.definition.just
+#   ^^^^^^^^^^^^^^^^^^ invalid.deprecated.just
 
 
 #
@@ -63,9 +63,8 @@ set windows-shell := ["powershell.exe", "-NoLogo", "-Command#nocomment"]
 
 set windows-powershell := true
 #^^ storage.modifier.definition.just
-#   ^^^^^^^^^^^^^^^^^^ entity.name.definition.just
-#                      ^^ keyword.operator.assignment.just
-#                         ^^^^ constant.language.boolean.just
+#   ^^^^^^^^^^^^^^^^^^ invalid.deprecated.just
+#                      ^^^^^^^ source.just
 
 
 #

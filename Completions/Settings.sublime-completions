@@ -3,22 +3,44 @@
     "completions": [
         {
             "trigger": "allow-duplicate-recipes",
-            "details": "Later recipes override earlier",
+            "details": "Later recipes override earlier ones",
+            "kind": ["keyword", "k", "setting"]
+        },
+        {
+            "trigger": "allow-duplicate-variables",
+            "details": "Later variables override earlier ones",
+            "kind": ["keyword", "k", "setting"]
+        },
+        {
+            "trigger": "dotenv-filename",
+            "contents": "dotenv-filename := \"$1\"",
+            "details": "Load .env file with a custom name, if present",
             "kind": ["keyword", "k", "setting"]
         },
         {
             "trigger": "dotenv-load",
-            "details": "Load .env file, if it exists",
+            "details": "Load .env file, if present",
+            "kind": ["keyword", "k", "setting"]
+        },
+        {
+            "trigger": "dotenv-path",
+            "contents": "dotenv-path := \"$1\"",
+            "details": "Load .env file at path. Overrides dotenv-filename",
+            "kind": ["keyword", "k", "setting"]
+        },
+        {
+            "trigger": "dotenv-required",
+            "details": "Error if a .env file isn't found",
             "kind": ["keyword", "k", "setting"]
         },
         {
             "trigger": "export",
-            "details": "Export all variables",
+            "details": "Export all variables to recipes",
             "kind": ["keyword", "k", "setting"]
         },
         {
             "trigger": "fallback",
-            "details": "Search up directory tree",
+            "details": "Search up directory tree for justfile",
             "kind": ["keyword", "k", "setting"]
         },
         {
@@ -32,18 +54,43 @@
             "kind": ["keyword", "k", "setting"]
         },
         {
+            "trigger": "quiet",
+            "details": "Disable line echoing by default",
+            "kind": ["keyword", "k", "setting"]
+        },
+        {
+            "trigger": "script-interpreter",
+            "contents": "script-interpreter := [\"${1:bash}\", \"${2:-uc}\"]",
+            "details": "Command for recipes with empty <code>[script]</code>",
+            "kind": ["keyword", "k", "setting"]
+        },
+        {
             "trigger": "shell",
+            "contents": "shell := [\"${1:bash}\", \"${2:-uc}\"]",
             "details": "Command for recipes/backticks",
             "kind": ["keyword", "k", "setting"]
         },
         {
             "trigger": "tempdir",
+            "contents": "tempdir := \"$1\"",
             "details": "Path to create temp directories",
             "kind": ["keyword", "k", "setting"]
         },
         {
+            "trigger": "unstable",
+            "details": "Enable unstable features",
+            "kind": ["keyword", "k", "setting"]
+        },
+        {
             "trigger": "windows-shell",
-            "details": "Command for recipes/backticks",
+            "contents": "windows-shell := [\"${1:pwsh.exe}\", \"${2:-NoLogo}\", \"${3:-NoProfile}\"]",
+            "details": "Windows command for recipes/backticks",
+            "kind": ["keyword", "k", "setting"]
+        },
+        {
+            "trigger": "working-directory",
+            "contents": "working-directory := \"$1\"",
+            "details": "Working directory for recipes/backticks",
             "kind": ["keyword", "k", "setting"]
         },
     ]
