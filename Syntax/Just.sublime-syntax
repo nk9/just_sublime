@@ -134,8 +134,30 @@ variables:
     )
   deprecated_settings: |-
     (?x: windows-powershell )
-  recipe_attributes: |-
-    (?x: linux | macos | no-cd | no-exit-message | private | unix | windows )
+  recipe_attributes_bare: |-
+    (?x:
+      confirm
+    | linux
+    | macos
+    | no-cd
+    | no-exit-message
+    | no-quiet
+    | openbsd
+    | positional-arguments
+    | private
+    | script
+    | unix
+    | windows
+    )
+  recipe_attributes_arguments: |-
+    (?x:
+      confirm
+    | doc
+    | extension
+    | group
+    | script
+    | working-directory
+    )
 
 ###############################################################################
 # MAIN CONTEXT
@@ -195,7 +217,7 @@ contexts:
     - include: operators
     - include: function-calls
     - include: if-statements
-    - include: strings
+    - include: all-strings
     - include: operands-variables
 
 
@@ -290,11 +312,17 @@ contexts:
 
 ###[ CHARACTERS ]##############################################################
 
-  strings:
+  all-strings:
+    - include: quoted-strings
+    - include: backtick-strings
+
+  quoted-strings:
     - include: single-quote-block-strings
     - include: single-quote-strings
     - include: double-quote-block-strings
     - include: double-quote-strings
+
+  backtick-strings:
     - include: backtick-quote-block-strings
     - include: backtick-quote-strings
 
@@ -419,13 +447,30 @@ contexts:
     - include: eol-pop
 
   expect-recipe-attribute-name:
-    - match: ({{recipe_attributes}})
+    - match: ({{recipe_attributes_arguments}})
+      scope: variable.annotation.just
+      set: recipe-attribute-argument
+    - match: ({{recipe_attributes_bare}})
       scope: variable.annotation.just
       pop: 1
     - match: \]
       scope: invalid.illegal.just
+      comment: If properly handled, this frame will be popped before the \] is encountered
       pop: 2
     - include: else-pop
+
+  recipe-attribute-argument:
+    - match: \(
+      scope:  punctuation.definition.annotation.begin.just
+      set: recipe-attribute-argument-body
+    - include: else-pop
+
+  recipe-attribute-argument-body:
+    - meta_scope: meta.string.just
+    - match: \)
+      scope: punctuation.definition.annotation.end.just
+      pop: 1
+    - include: quoted-strings
 
   recipe-definition:
     - match: (?=^@?{{valid_name}}(?![^:]*:=)) # Matches '^recipeName' but not '^varName :='
@@ -685,7 +730,7 @@ contexts:
       pop: 1
     - match: ','
       scope: punctuation.separator.parameters.just
-    - include: strings
+    - include: all-strings
     - include: eol-pop #??
 
   settings-string-name:
@@ -696,7 +741,7 @@ contexts:
         - assignment-operator
 
   settings-string-value:
-    - include: strings
+    - include: all-strings
     - include: eol-pop
 
 # ###[ General Types ]##########################################################
