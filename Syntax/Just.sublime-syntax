@@ -462,15 +462,29 @@ contexts:
   recipe-attribute-argument:
     - match: \(
       scope:  punctuation.definition.annotation.begin.just
-      set: recipe-attribute-argument-body
+      set: recipe-attribute-argument-paren-body
+    - match: ':'
+      scope: keyword.operator.assignment.just
+      set: recipe-attribute-argument-colon-body
     - include: else-pop
 
-  recipe-attribute-argument-body:
-    - meta_scope: meta.string.just
+  recipe-attribute-argument-paren-body:
     - match: \)
       scope: punctuation.definition.annotation.end.just
       pop: 1
+    - match: ','
+      scope: punctuation.separator.parameters.just
+    - match: '`'
+      scope: invalid.illegal.just
+      pop: 1
     - include: quoted-strings
+
+  recipe-attribute-argument-colon-body:
+    - match: '`'
+      scope: invalid.illegal.just
+      pop: 1
+    - include: quoted-strings
+    - include: else-pop
 
   recipe-definition:
     - match: (?=^@?{{valid_name}}(?![^:]*:=)) # Matches '^recipeName' but not '^varName :='
