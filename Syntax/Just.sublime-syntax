@@ -166,6 +166,7 @@ variables:
 contexts:
   main:
     - include: includes
+    - include: modules
     - include: settings
     - include: aliases
     - include: comments
@@ -198,6 +199,18 @@ contexts:
       captures:
         1: keyword.control.import.just
         2: meta.generic-name.just
+
+  modules:
+    - match: ^(mod)(\??)(\s+\w+)
+      scope: meta.statement.mod.just
+      captures:
+        1: keyword.control.import.just
+        2: keyword.operator.assignment.just
+        3: meta.generic-name.just
+    - match: '`'
+      scope: invalid.illegal.just
+      pop: 2
+    - include: quoted-strings
 
 ###[ ALIASES ]#################################################################
 
